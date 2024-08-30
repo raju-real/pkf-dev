@@ -29,7 +29,7 @@
                                     <div class="col-md-4 col-12">
                                         <div class="form-group">
                                             <label>Category {!! starSign() !!}</label>
-                                            <select name="category" class="form-control select2">
+                                            <select name="category" class="form-control select2" id="cateogory">
                                                 <option value="">Select Category</option>
                                                 @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}"
@@ -44,105 +44,104 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4 col-12">
+                                    <div class="col-sm-12 mb-2 col-md-6 col-lg-4">
                                         <div class="form-group">
-                                            <label>Name {!! starSign() !!}</label>
-                                            <input type="text" name="name"
-                                                value="{{ old('name') ?? ($data->name ?? '') }}"
-                                                class="form-control {!! hasError('name') !!}" placeholder="Name" />
-                                            @error('name')
-                                                {!! displayError($message) !!}
-                                            @enderror
-                                        </div>
+                                            <label>Subcategory {!! starSign() !!}</label>
+                                            <select name="subcategory" class="form-control select2" id="subcategory" data-old-value="{{ $data->subcategory_id ?? '' }}">
+                                                @if (isset($obj))
+                                                    <option value="{{ $obj->subcategory_id }}" selected>
+                                                        {{ $obj->subcategory->name ?? '' }}
+                                                    </option>
+                                                @else
+                                                    <option value="">Select Subcategory</option>
+                                                @endisset
+                                        </select>
                                     </div>
-                                    <div class="col-md-4 col-12">
-                                        <div class="form-group">
-                                            <label>Designation {!! starSign() !!}</label>
-                                            <input type="text" name="designation"
-                                                value="{{ old('designation') ?? ($data->designation ?? '') }}"
-                                                class="form-control {!! hasError('designation') !!}" placeholder="Designation" />
-                                            @error('designation')
-                                                {!! displayError($message) !!}
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-12">
-                                        <div class="form-group">
-                                            <label>Email {!! starSign() !!}</label>
-                                            <input type="text" name="email"
-                                                value="{{ old('email') ?? ($data->email ?? '') }}"
-                                                class="form-control {!! hasError('email') !!}" placeholder="Email" />
-                                            @error('email')
-                                                {!! displayError($message) !!}
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-12">
-                                        <div class="form-group">
-                                            <label>Telephone {!! starSign() !!}</label>
-                                            <input type="text" name="telephone"
-                                                value="{{ old('telephone') ?? ($data->telephone ?? '') }}"
-                                                class="form-control {!! hasError('telephone') !!}" placeholder="Telephone" />
-                                            @error('telephone')
-                                                {!! displayError($message) !!}
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-12">
-                                        <div class="form-group">
-                                            <label>Linkedin Link</label>
-                                            <input type="text" name="linkedin_link"
-                                                value="{{ old('linkedin_link') ?? ($data->linkedin_link ?? '') }}"
-                                                class="form-control {!! hasError('linkedin_link') !!}" placeholder="Linkedin Link" />
-                                            @error('linkedin_link')
-                                                {!! displayError($message) !!}
-                                            @enderror
-                                        </div>
-                                    </div>
+                                    @error('subcategory')
+                                        {!! displayError($message) !!}
+                                    @enderror
+                                </div>
 
-                                    <div class="col-md-4 col-12">
-                                        <div class="form-group">
-                                            <label for="customFile">Image (png,jpg,jpeg, Max: 5MB) {!! starSign() !!}</label>
-                                            <div class="custom-file">
-                                                <input name="image" type="file"
-                                                    class="custom-file-input {!! hasError('image') !!}" id="customFile" />
-                                                <label class="custom-file-label" for="customFile">Choose Image</label>
-                                                @error('image')
-                                                    {!! displayError($message) !!}
-                                                @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12 col-12">
-                                        <div class="form-group">
-                                            <label>Description {!! starSign() !!}</label>
-                                            <textarea name="description" id="description" class="form-control" cols="30" rows="10">{{ old('description') ?? ($data->description ?? '') }}</textarea>
-                                            @error('description')
-                                                {!! displayError($message) !!}
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 text-right">
-                                        <a href="{{ route('admin.people-directories.index') }}"
-                                            class="btn btn-info">Back</a>
-                                        <x-submit-button-component />
+                                <div class="col-md-4 col-12">
+                                    <div class="form-group">
+                                        <label>Title {!! starSign() !!}</label>
+                                        <input type="text" name="title"
+                                            value="{{ old('title') ?? ($data->title ?? '') }}"
+                                            class="form-control {!! hasError('title') !!}" placeholder="Title" />
+                                        @error('title')
+                                            {!! displayError($message) !!}
+                                        @enderror
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+                               
+
+                                <div class="col-md-12 col-12">
+                                    <div class="form-group">
+                                        <label>Description {!! starSign() !!}</label>
+                                        <textarea name="description" id="description" class="form-control" cols="30" rows="10">{{ old('description') ?? ($data->description ?? '') }}</textarea>
+                                        @error('description')
+                                            {!! displayError($message) !!}
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-12 text-right">
+                                    <a href="{{ route('admin.services.index') }}"
+                                        class="btn btn-info">Back</a>
+                                    <x-submit-button-component />
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+</div>
 @endsection
 
 @push('js')
-    <script>
-        CKEDITOR.replace('description', {
-            removePlugins: ['info', 'image'],
+<script>
+    CKEDITOR.replace('description', {
+        removePlugins: ['info', 'image'],
+    });
+
+    const subCategorySelector = $('#subcategory');
+
+    $(document).ready(function() {
+        let category_id = $('#cateogory').val();
+        if(category_id !== undefined) {
+            appendSubCategory(category_id);
+        }
+    });
+
+    $(document).on('change', '#cateogory', function() {
+        subCategorySelector.empty().append('<option value="">Select Subcategory</option>');
+        let category_id = $(this).val();
+        appendSubCategory(category_id);
+    });
+
+    function appendSubCategory(category_id) {
+        $.ajax({
+            url: window.location.origin + "/api/cat-wise-service-subcategory/" + category_id,
+            success: function (response) {
+                $.each(response, function (i, subcategory) {
+                    const option = $('<option>', {
+                        value: subcategory.id,
+                        text: subcategory.name
+                    });
+
+                    const oldSelectedValue = subCategorySelector.data('old-value');
+                    if (oldSelectedValue !== undefined && oldSelectedValue !== null && oldSelectedValue === subcategory.id) {
+                        option.attr('selected', 'selected');
+                    }
+
+                    subCategorySelector.append(option);
+                });
+            }
         });
-    </script>
+    }
+    
+
+</script>
 @endpush

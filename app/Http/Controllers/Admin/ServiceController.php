@@ -41,12 +41,16 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name' => 'required|string|max:191',
-            'description' => 'nullable|sometimes|string|max:300'
+            'category' => 'required|exists:service_categories,id',
+            'subcategory' => 'required|exists:service_subcategories,id',
+            'title' => 'required|string|max:191',
+            'description' => 'nullable|sometimes|string|max:10000'
         ]);
 
         $row = new Service();
-        $row->name = $request->name;
+        $row->category_id = $request->category;
+        $row->subcategory_id = $request->subcategory;
+        $row->title = $request->title;
         $row->description = $request->description;
         $row->save();
         return redirect()->route('admin.services.index')->with(savedMessage());
@@ -71,9 +75,10 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
+        $categories = ServiceCategory::orderBy('name')->get();
         $data = Service::findOrFail($id);
         $route = route('admin.services.update',$id);
-        return view('admin.service.service_add_edit',compact('data','route'));
+        return view('admin.service.service_add_edit',compact('data','route','categories'));
     }
 
     /**
@@ -86,12 +91,16 @@ class ServiceController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'name' => 'required|string|max:191',
-            'description' => 'nullable|sometimes|string|max:300'
+            'category' => 'required|exists:service_categories,id',
+            'subcategory' => 'required|exists:service_subcategories,id',
+            'title' => 'required|string|max:191',
+            'description' => 'nullable|sometimes|string|max:10000'
         ]);
 
         $row = Service::findOrFail($id);
-        $row->name = $request->name;
+        $row->category_id = $request->category;
+        $row->subcategory_id = $request->subcategory;
+        $row->title = $request->title;
         $row->description = $request->description;
         $row->save();
         return redirect()->route('admin.services.index')->with(updateMessage());

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\OurService;
+use App\Models\ServiceSubcategory;
 use Illuminate\Http\Request;
 use App\Models\SisterConcern;
 use Illuminate\Support\Facades\Route;
@@ -20,33 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/view-service-details/{id}',function($id) {
-    $data = OurService::find($id);
-    if(isset($data)) {
-        return response()->json([
-            'type' => 'success',
-            'heading' => $data->name,
-            'content' => html_entity_decode($data->description)
-        ]);
-    } else {
-        return response()->json([
-            'type' => 'error'
-        ]);
-    }
-});
-
-Route::get('/view-sister-concern-details/{id}',function($id) {
-    $data = SisterConcern::find($id);
-    if(isset($data)) {
-        return response()->json([
-            'type' => 'success',
-            'heading' => $data->name,
-            'content' => html_entity_decode($data->description)
-        ]);
-    } else {
-        return response()->json([
-            'type' => 'error'
-        ]);
-    }
+Route::get('cat-wise-service-subcategory/{category_id}',function($category_id){
+    return ServiceSubcategory::where('category_id',$category_id)->select('id','category_id','name')->get();
 });
 
