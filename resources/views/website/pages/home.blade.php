@@ -7,52 +7,24 @@
 @section('content')
 <div id="Carousel" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
-        <li data-target="#Carousel" data-slide-to="0" class=&#39;active&#39;></li>
-        <li data-target="#Carousel" data-slide-to="1"></li>
-        <li data-target="#Carousel" data-slide-to="2"></li>
-        <li data-target="#Carousel" data-slide-to="3"></li>
+        @foreach(allSliders() as $slider)
+        <li data-target="#Carousel" data-slide-to="{{ $loop->index }}" class="{{ $loop->first ? 'active' :'' }}"></li>
+        @endforeach
     </ol>
     <div class="carousel-inner">
-        <div class="Blue carousel-item active"> <img class="d-block w-100"
-                src="{{ asset('assets/website/media/calculator-1680905_1920.jpg') }}"
+        @foreach(allSliders() as $slider)
+        <div class="Blue carousel-item {{ $loop->first ? 'active' : '' }}"> <img class="d-block w-100"
+                src="{{ asset($slider->image) }}"
                 alt="Global expertise with local knowledge">
             <div>
                 <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
                 <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h2>
-
-                <a href="#">Click Here</a>
+                @if($slider->image !== Null)
+                <a href="{{ $slider->link ?? '#' }}">{{ $slider->button_name ?? "Click Here" }}</a>
+                @endif
             </div>
         </div>
-        <div class="Blue carousel-item"> <img class="d-block w-100"
-                src="{{ asset('assets/website/media/calculator-1680905_1920.jpg') }}"
-                alt="The PKF network regional offices">
-            <div>
-                <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
-                <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h2>
-
-                <a href="#">Click here</a>
-            </div>
-        </div>
-        <div class="Blue carousel-item"> <img class="d-block w-100"
-                src="{{ asset('assets/website/media/calculator-1680905_1920.jpg') }}"
-                alt="Latest news from across the PKF International network">
-            <div>
-                <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
-                <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h2>
-
-                <a href="#">Click here</a>
-            </div>
-        </div>
-        <div class="Blue carousel-item"> <img class="d-block w-100"
-                src="{{ asset('assets/website/media/calculator-1680905_1920.jpg') }}"
-                alt="PKF Worldwide Tax Guide">
-            <div>
-                <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
-                <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h2>
-
-                <a href="#">Click here</a>
-            </div>
-        </div>
+        @endforeach
     </div>
     <a class="carousel-control-prev" role="button" href="#Carousel" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -72,12 +44,7 @@
                 <div class="col-md-12">
                     <div>
 
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                            deserunt mollit anim id est laborum.</p>
+                        <p>{{ siteSetting()['welcome_message'] ?? '' }}</p>
                     </div>
                 </div>
             </div>
@@ -86,38 +53,16 @@
 </section>
 <section id='iconstrip' class='container'>
     <div class='row mt-3 mb-3'>
+        @foreach(allServices() as $service)
         <div class='col-4 col-md mb-3'>
             <a href="#" title="Service">
-                <img src="{{ asset('assets/website/media/icons/index-icon-assurance.png') }}" /> Service
+                @isset($service->icon)
+                <img src="{{ asset($service->icon) }}" height="100" width="100"/>
+                @endisset
+                 {{ $service->title ?? "" }}
             </a>
         </div>
-        <div class='col-4 col-md mb-3'>
-            <a href="#" title="Service">
-                <img src="{{ asset('assets/website/media/icons/index-icon-taxlegal.png') }}" /> Service
-            </a>
-        </div>
-        <div class='col-4 col-md mb-3'>
-            <a href="#" title="Service">
-                <img src="{{ asset('assets/website/media/icons/index-icon-advisory.png') }}" /> Service
-            </a>
-        </div>
-        <div class='col-4 col-md mb-3'>
-            <a href="#" title="Service">
-                <img src="{{ asset('assets/website/media/icons/index-icon-bussol.png') }}" /> Service
-            </a>
-        </div>
-        <div class='col-4 col-md mb-3'>
-            <a href="#" title="Service">
-                <img src="{{ asset('assets/website/media/icons/index-icon-corpfinance.png') }}" /> Service
-            </a>
-        </div>
-        <div class='col-4 col-md mb-3'>
-            <a href="#" title="Service">
-                <img
-                    src="{{ asset('assets/website/media/icons/index-icon-specialisthospitalityconsulting.png') }}" />
-                Service
-            </a>
-        </div>
+       @endforeach
     </div>
 </section>
 
@@ -157,42 +102,28 @@
     <div class='row'>
         <div class='col-md-5 h-100'>
             <div class='title p-3'>
-                <span>2021-02-19</span>
-                <h2>Lorem ipsum dolor sit amet</h2>
+                <span>{{ date('Y-m-d',strtotime(featuredNews()->created_at)) }}</span>
+                <h2>{{ featuredNews()->title ?? "" }}</h2>
             </div>
-            <img src="{{ asset('assets/website/media/default-image-620x600.jpg') }}" class="w-100" />
-            <a href="#" title="Read more" class="readmore newsitem1">Read more</a>
+            <img src="{{ asset(featuredNews()->image) }}" class="w-100"/>
+            <a href="{{ route('news-details',featuredNews()->slug) }}" title="Read more" class="readmore newsitem1">Read more</a>
         </div>
         <div class='col-md-7 p-3'>
-            <a href="news.html" class='corner-btn right'>All News</a>
+            <a href="{{ route('all-news') }}" class='corner-btn right'>All News</a>
             <h2>Latest News</h2>
             <div class='row clear'>
+                @foreach(allNews() as $news)
                 <div class='col-md h-100'>
                     <div class='newsblock'>
-                        <h5>2021-02-19</h5>
-                        <h4>Lorem ipsum dolor sit amet</h4>
+                        <h5>{{ date('Y-m-d',strtotime($news->created_at)) }}</h5>
+                        <h4>{{ strLimit($news->title,50) }}</h4>
                         <div class='short'>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                aliquip ex ea commodo consequat. </p>
+                            <p>{!! strLimit($news->description,350) !!}</p>
                         </div>
                     </div>
-                    <a class='readmore' href='news.html'>Read more</a>
+                    <a class='readmore' href='{{ route('news-details',$news->slug) }}'>Read more</a>
                 </div>
-                <div class='col-md h-100'>
-                    <div class='newsblock'>
-                        <h5>2021-02-18</h5>
-                        <h4>Lorem ipsum dolor sit amet</h4>
-                        <div class='short'>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                aliquip ex ea commodo consequat. </p>
-                        </div>
-                    </div>
-                    <a class='readmore' href='news.html'>Read more</a>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>

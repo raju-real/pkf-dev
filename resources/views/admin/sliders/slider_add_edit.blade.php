@@ -50,8 +50,8 @@
                                 </div>
                                 <div class="col-md-4 col-12">
                                     <div class="form-group">
-                                        <label>Image {!! starSign() !!}</label>
-                                        <input type="file" name="image" accept=".jpg,.jpge,.png"
+                                        <label>Image (1920x468, Max: 5MB) {!! starSign() !!}</label>
+                                        <input type="file" name="image" accept=".jpg,.jpeg,.png"
                                             class="form-control {!! hasError('image') !!}" />
                                         @error('image')
                                         {!! displayError($message) !!}

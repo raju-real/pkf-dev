@@ -17,57 +17,39 @@ class BasicController extends Controller
         return view('admin.basic.website_settings');
     }
 
-    public function updateWebsiteSettings(Request $request){
-        $this->validate($request,[
-            'company_name' => 'required|string|max:100',
-            'email' => 'required|email|max:50',
-            'mobile' => 'required|max:20',
-            'phone' => 'required|max:20',
-            'address' => 'required|string|max:2000',
-            'site_slogan' => 'required|string|max:2000',
-            'about_us_section_slogan' => 'required|string|max:2000',
-            'service_section_slogan' => 'required|string|max:2000',
-            'event_section_slogan' => 'required|string|max:2000',
-            'team_section_slogan' => 'required|string|max:2000',
-            'faq_section_slogan' => 'required|string|max:2000',
-            'contact_us_section_slogan' => 'required|string|max:2000',
-            'client_section_slogan' => 'required|string|max:2000',
-            'newsletter_section_slogan' => 'required|string|max:2000',
-            'youtube_video_link' => 'required|string|max:2000',
-            'google_map_url' => 'required|string|max:2000',
-            'about_us' => 'required|string|max:5000',
-            'mission_vission' => 'required|string|max:5000',
-            'privacy_policy' => 'required|string|max:5000',
-        ]);
-        //return $request;
-        $setting_data['company_name'] = $request->company_name ?? '';
-        $setting_data['email'] = $request->email ?? '';
-        $setting_data['mobile'] = $request->mobile ?? '';
-        $setting_data['phone'] = $request->phone ?? '';
-        $setting_data['fax'] = $request->fax ?? '';
-        $setting_data['address'] = $request->address ?? '';
-        $setting_data['site_slogan'] = $request->site_slogan ?? '';
-        $setting_data['about_us_section_slogan'] = $request->about_us_section_slogan ?? '';
-        $setting_data['service_section_slogan'] = $request->service_section_slogan ?? '';
-        $setting_data['event_section_slogan'] = $request->event_section_slogan ?? '';
-        $setting_data['team_section_slogan'] = $request->team_section_slogan ?? '';
-        $setting_data['faq_section_slogan'] = $request->faq_section_slogan ?? '';
-        $setting_data['client_section_slogan'] = $request->client_section_slogan ?? '';
-        $setting_data['contact_us_section_slogan'] = $request->contact_us_section_slogan ?? '';
-        $setting_data['newsletter_section_slogan'] = $request->newsletter_section_slogan ?? '';
-        $setting_data['youtube_video_link'] = $request->youtube_video_link ?? '';
-        $setting_data['google_map_url'] = $request->google_map_url ?? '';
-        $setting_data['about_us'] = $request->about_us ?? '';
-        $setting_data['mission_vission'] = $request->mission_vission ?? '';
-        $setting_data['privacy_policy'] = $request->privacy_policy ?? '';
-        $setting_data['facebook_url'] = $request->facebook_url ?? '';
-        $setting_data['twitter_url'] = $request->twitter_url ?? '';
-        $setting_data['linkedin_url'] = $request->linkedin_url ?? '';
-        $setting_data['instagram_url'] = $request->instagram_url ?? '';
-        $newJsonString = json_encode($setting_data, JSON_PRETTY_PRINT);
-        file_put_contents(base_path('assets/json/site_setting.json'), $newJsonString);
-        return redirect()->route('admin.website-settings')->with(updateMessage());
+    public function updateWebsiteSettings(Request $request)
+{
+    $this->validate($request, [
+        'company_name' => 'required|string|max:100',
+        'email' => 'required|email|max:50',
+        'mobile' => 'required|max:20',
+        'phone' => 'required|max:20',
+        'address' => 'required|string|max:2000',
+        'welcome_message' => 'required|string|max:2000',
+        'youtube_video_link' => 'required|string|max:2000',
+        'google_map_url' => 'required|string|max:2000',
+        'about_us' => 'required|string|max:5000',
+        'mission_vission' => 'required|string|max:5000',
+        'privacy_policy' => 'required|string|max:5000',
+    ]);
+
+    // Fetch all keys from the request
+    $keys = array_keys($request->all());
+
+    // Prepare the setting data array
+    $setting_data = [];
+
+    foreach ($keys as $key) {
+        $setting_data[$key] = $request->input($key, '');
     }
+
+    // Convert the settings data to JSON and save it
+    $newJsonString = json_encode($setting_data, JSON_PRETTY_PRINT);
+    file_put_contents(base_path('assets/json/site_setting.json'), $newJsonString);
+
+    return redirect()->route('admin.website-settings')->with(updateMessage());
+}
+
 
     public function assetList() {
         $data = Asset::with('inventories','notes')->first();

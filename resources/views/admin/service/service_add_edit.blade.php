@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'Add/Edit People Directory')
+@section('title', 'Add/Edit Service')
 @push('css')
 @endpush
 
@@ -8,7 +8,7 @@
         <div class="content-header-left col-md-9 col-12 mb-2">
             <div class="row breadcrumbs-top">
                 <div class="col-12">
-                    <h2 class="content-header-title float-left mb-0">{{ 'Add/Edit People Directory' }}</h2>
+                    <h2 class="content-header-title float-left mb-0">{{ 'Add/Edit Service' }}</h2>
                 </div>
             </div>
         </div>
@@ -61,6 +61,7 @@
                                         {!! displayError($message) !!}
                                     @enderror
                                 </div>
+                            
 
                                 <div class="col-md-4 col-12">
                                     <div class="form-group">
@@ -82,6 +83,20 @@
                                         @error('description')
                                             {!! displayError($message) !!}
                                         @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-12">
+                                    <div class="form-group">
+                                        <label for="customFile">Icon (png,Max: 1MB) {!! starSign() !!}</label>
+                                        <div class="custom-file">
+                                            <input name="icon" type="file"
+                                                class="custom-file-input {!! hasError('icon') !!}" id="customFile" accept=".png" />
+                                            <label class="custom-file-label" for="customFile" >Choose icon</label>
+                                            @error('icon')
+                                            {!! displayError($message) !!}
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
 

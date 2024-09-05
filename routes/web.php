@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Session;
 // Website Part
 Route::get('/','HomePageController@index')->name('home');
 Route::post('send-contact-message','HomePageController@storeMessage')->name('send-contact-message');
+Route::get('all-news','HomePageController@allNews')->name('all-news');
+Route::get('news-details/{slug}','HomePageController@newsDetails')->name('news-details');
+Route::get('peoples','HomePageController@allPeoples')->name('peoples');
+Route::get('people/{slug}','HomePageController@peopleDetails')->name('people');
 
 
 // Admin part

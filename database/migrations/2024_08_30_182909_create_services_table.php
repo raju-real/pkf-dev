@@ -19,6 +19,7 @@ class CreateServicesTable extends Migration
             $table->string('category_id',191)->nullable();
             $table->string('subcategory_id',191)->nullable();
             $table->longText('description')->nullable();
+            $table->string('icon')->nullable();
             $table->timestamps();
         });
     }

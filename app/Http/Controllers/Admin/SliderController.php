@@ -41,7 +41,7 @@ class SliderController extends Controller
         $this->validate($request,[
             'title' => 'required|string|max:191',
             'short_text' => 'nullable|sometimes|string|max:191',
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:5120',
+            'image' => 'required|image|mimes:png,jpg,jpeg|max:5120|dimensions:width=1920,height=468',
             'button_name' => 'nullable|sometimes|string|max:50',
             'link' => 'nullable|sometimes|string|max:350',
         ]);
@@ -91,10 +91,10 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'title' => 'required|string|max:191',
             'short_text' => 'nullable|sometimes|string|max:191',
-            'image' => 'nullable|sometimes|image|mimes:png,jpg,jpeg|max:5120',
+            'image' => 'nullable|sometimes|image|mimes:png,jpg,jpeg|max:5120|dimensions:width=1920,height=468',
             'button_name' => 'nullable|sometimes|string|max:50',
             'link' => 'nullable|sometimes|string|max:350',
         ]);

@@ -26,6 +26,7 @@
                         <thead>
                             <tr class="text-nowrap">
                                 <th>Sl</th>
+                                <th>Icon</th>
                                 <th>Category</th>
                                 <th>Subcategory</th>
                                 <th>Title</th>
@@ -37,6 +38,10 @@
                             @foreach ($results as $data)
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
+                                    <td>
+                                        <img src="{{ asset($data->icon) }}" alt="" class="img-responsive"
+                                            height="50" width="50">
+                                    </td>
                                     <td>{{ $data->category->name ?? "" }}</td>
                                     <td>{{ $data->subcategory->name ?? "" }}</td>
                                     <td>{{ strLimit($data->title,50) }}</td>

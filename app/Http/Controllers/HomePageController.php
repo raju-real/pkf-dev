@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Mail\SendMail;
+use App\Models\News;
+use App\Models\NewsCategory;
+use App\Models\PeopleDirectory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -10,6 +13,47 @@ class HomePageController extends Controller
 {
     public function index() {
         return view('website.pages.home');
+    }
+
+    public function allNews() {
+        $data = News::query();
+        $data->latest();
+        $data->when(request()->get('SearchTerm'),function($query) {
+            $search = request()->get('SearchTerm');
+            $query->where('title','LIKE',"%{$search}%")->orWhere('description',"LIKE","%{$search}%");
+        });
+        $data->when(request()->get('category'),function($query) {
+            $category_slug = request()->get('category');
+            $id = NewsCategory::whereSlug($category_slug)->first()->id;
+            $query->where('category_id',$id);
+        });
+        // $grid_results = $data->skip(0)->take(4)->get();
+        // $list_results = $data->skip(4)->take(10)->paginate(6);
+        $results = $data->paginate(10);
+        return view('website.pages.news_list',compact('results'));
+    }
+
+    public function newsDetails($slug) {
+        $news = News::whereSlug($slug)->first();
+        return view('website.pages.news_details',compact('news'));
+    }
+
+    public function allPeoples () {
+        $data = PeopleDirectory::query();
+        $data->when(request()->get('name'),function($query) {
+            $search = request()->get('name');
+            $query->where('name','LIKE',"%{$search}%")->orWhere('description',"LIKE","%{$search}%");
+        });
+        $data->when(request()->get('department'),function($query) {
+            $query->where('department_id',request()->get('department'));
+        });
+        $peoples = $data->latest()->get();
+        return view('website.pages.people_lists',compact('peoples'));
+    }
+
+    public function peopleDetails($slug) {
+        $people = PeopleDirectory::whereSlug($slug)->first();
+        return view('website.pages.people_details',compact('people'));
     }
 
     public function storeMessage(Request $request) {

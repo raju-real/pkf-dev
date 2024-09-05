@@ -3,9 +3,14 @@
  * Required sign for from label
  */
 
+use App\Models\Department;
 use App\Models\Menu;
 use Illuminate\Support\Str;
 use App\Models\MenuActivity;
+use App\Models\News;
+use App\Models\NewsCategory;
+use App\Models\Service;
+use App\Models\Slider;
 use App\Models\UserPermission;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
@@ -196,20 +201,6 @@ if (! function_exists('uploadFile')) {
 }
 
 /**
- * Get pusher info from file
- */
-if(!function_exists('siteSetting')) {
-    function siteSetting() {
-        if(file_exists('assets/json/site_setting.json')) {
-            $jsonString = File::get('assets/json/site_setting.json');
-            return json_decode($jsonString,true);
-        } else {
-            return "";
-        }
-    }
-}
-
-/**
  * Get blood group list
  */
 if(! function_exists('bloodGroups')) {
@@ -298,6 +289,50 @@ if (! function_exists('encrypt_decrypt')) {
             return $en_slash_remove;
         }
         return FALSE;	# if function is not used properly
+    }
+}
+
+
+// Website common
+if(!function_exists('siteSetting')) {
+    function siteSetting() {
+        if(file_exists('assets/json/site_setting.json')) {
+            $jsonString = File::get('assets/json/site_setting.json');
+            return json_decode($jsonString,true);
+        } else {
+            return "";
+        }
+    }
+}
+
+if(! function_exists('allSliders')) {
+    function allSliders() {
+        return Slider::latest()->get();
+    }
+}
+if(! function_exists('allNews')) {
+    function allNews() {
+        return News::latest()->take(2)->get();
+    }
+}
+if(! function_exists('newsCategories')) {
+    function newsCategories() {
+        return NewsCategory::latest()->orderBy('name')->get();
+    }
+}
+if(! function_exists('allServices')) {
+    function allServices() {
+        return Service::latest()->get();
+    }
+}
+if(! function_exists('featuredNews')) {
+    function featuredNews() {
+        return News::latest()->where('category_id',1)->first();
+    }
+}
+if(! function_exists('allDepartment')) {
+    function allDepartment() {
+        return Department::latest()->orderBy('name')->get();
     }
 }
 

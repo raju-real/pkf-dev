@@ -95,6 +95,7 @@ class ServiceSubcategoryController extends Controller
         ]);
 
         $row = ServiceSubcategory::findOrFail($id);
+        $row->category_id = $request->category;
         $row->name = $request->name;
         $row->description = $request->description;
         $row->save();

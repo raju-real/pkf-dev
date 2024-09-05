@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use App\Models\NewsCategory;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class NewsCategoryController extends Controller
 {
@@ -45,6 +46,7 @@ class NewsCategoryController extends Controller
 
         $row = new NewsCategory();
         $row->name = $request->name;
+        $row->slug = Str::slug($request->name);
         $row->description = $request->description;
         $row->save();
         return redirect()->route('admin.news-categories.index')->with(savedMessage());
@@ -90,6 +92,7 @@ class NewsCategoryController extends Controller
 
         $row = NewsCategory::findOrFail($id);
         $row->name = $request->name;
+        $row->slug = Str::slug($request->name);
         $row->description = $request->description;
         $row->save();
         return redirect()->route('admin.news-categories.index')->with(updateMessage());

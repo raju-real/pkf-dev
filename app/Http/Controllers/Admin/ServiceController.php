@@ -44,7 +44,8 @@ class ServiceController extends Controller
             'category' => 'required|exists:service_categories,id',
             'subcategory' => 'required|exists:service_subcategories,id',
             'title' => 'required|string|max:191',
-            'description' => 'nullable|sometimes|string|max:10000'
+            'description' => 'nullable|sometimes|string|max:10000',
+            'icon' => 'nullable|sometimes|image|mimes:png|max:1024',
         ]);
 
         $row = new Service();
@@ -52,6 +53,9 @@ class ServiceController extends Controller
         $row->subcategory_id = $request->subcategory;
         $row->title = $request->title;
         $row->description = $request->description;
+        if($request->file('icon')) {
+            $row->icon = uploadImage($request->file('icon'),'assets/files/images/services/');
+        }
         $row->save();
         return redirect()->route('admin.services.index')->with(savedMessage());
     }
@@ -94,7 +98,8 @@ class ServiceController extends Controller
             'category' => 'required|exists:service_categories,id',
             'subcategory' => 'required|exists:service_subcategories,id',
             'title' => 'required|string|max:191',
-            'description' => 'nullable|sometimes|string|max:10000'
+            'description' => 'nullable|sometimes|string|max:10000',
+            'icon' => 'nullable|sometimes|image|mimes:png|max:1024',
         ]);
 
         $row = Service::findOrFail($id);
@@ -102,6 +107,12 @@ class ServiceController extends Controller
         $row->subcategory_id = $request->subcategory;
         $row->title = $request->title;
         $row->description = $request->description;
+        if($request->file('icon')) {
+            if(file_exists($row->icon)) {
+                unlink($row->icon);
+            }
+            $row->icon = uploadImage($request->file('icon'),'assets/files/images/services/');
+        }
         $row->save();
         return redirect()->route('admin.services.index')->with(updateMessage());
     }
@@ -114,7 +125,11 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        Service::findOrFail($id)->delete();
+        $data = Service::findOrFail($id);
+        if(file_exists($data->icon)) {
+            unlink($data->icon);
+        }
+        $data->delete();
         return redirect()->route('admin.services.index')->with(deleteMessage());
     }
 }

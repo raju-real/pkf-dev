@@ -26,9 +26,9 @@
                         <thead>
                             <tr class="text-nowrap">
                                 <th>Sl</th>
+                                <th>Image</th>
                                 <th>Category</th>
                                 <th>Title</th>
-                                <th>Image</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -37,19 +37,19 @@
                             @foreach ($results as $data)
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
-                                    <td>{{ $data->category->name ?? "N/A" }}</td>
-                                    <td>{{ strLimit($data->title,50) }}</td>
                                     <td>
                                         <img src="{{ asset($data->image) }}" alt="" class="img-responsive"
                                             height="50" width="50">
                                     </td>
+                                    <td>{{ $data->category->name ?? "N/A" }}</td>
+                                    <td>{{ strLimit($data->title,50) }}</td>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn btn-sm dropdown-toggle hide-arrow" data-toggle="dropdown">
                                                 <i data-feather="more-vertical"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="{{ route('admin.news.edit',$data->id) }}">
+                                                <a class="dropdown-item" href="{{ route('admin.news.show',$data->slug) }}">
                                                     <i data-feather="eye" class="mr-50"></i>
                                                     <span>Details</span>
                                                 </a>
@@ -57,11 +57,11 @@
                                                     <i data-feather="edit-2" class="mr-50"></i>
                                                     <span>Edit</span>
                                                 </a>
-                                                <a class="dropdown-item delete-data" data-id="{{ 'delete-event-category-'.$data->id }}" href="javascript:void(0);">
+                                                <a class="dropdown-item delete-data" data-id="{{ 'delete-event-news-'.$data->id }}" href="javascript:void(0);">
                                                     <i data-feather="trash" class="mr-50"></i>
                                                     <span>Delete</span>
                                                 </a>
-                                                <form id="delete-event-category-{{ $data->id }}"
+                                                <form id="delete-event-news-{{ $data->id }}"
                                                     action="{{ route('admin.news.destroy',$data->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')

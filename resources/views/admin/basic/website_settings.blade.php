@@ -70,101 +70,21 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="col-md-12 col-12">
+                                    <div class="form-group">
+                                        <label>Welcome Message</label>
+                                        <textarea name="welcome_message" class="form-control p-0 {!! hasError('welcome_message') !!}" cols="30" rows="5" placeholder="Welcome Message">{{ old('welcome_message') ?? siteSetting()['welcome_message'] ?? '' }}</textarea>
+                                        @error('welcome_message')
+                                        {!! displayError($message) !!}
+                                        @enderror
+                                    </div>
+                                </div>
+
                                 <div class="col-md-4 col-12">
                                     <div class="form-group">
                                         <label>Address</label>
                                         <textarea name="address" class="form-control p-0 {!! hasError('address') !!}" cols="30" rows="1" placeholder="Address">{{ old('address') ?? siteSetting()['address'] ?? '' }}</textarea>
                                         @error('address')
-                                        {!! displayError($message) !!}
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label>Site Slogan {!! starSign() !!}</label>
-                                        <input type="text" name="site_slogan" value="{{ old('site_slogan') ?? siteSetting()['site_slogan'] ?? '' }}" class="form-control {!! hasError('site_slogan') !!}" placeholder="Site Slogan" />
-                                        @error('site_slogan')
-                                        {!! displayError($message) !!}
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label>About Us Section Slogan {!! starSign() !!}</label>
-                                        <input type="text" name="about_us_section_slogan" value="{{ old('about_us_section_slogan') ?? siteSetting()['about_us_section_slogan'] ?? '' }}" class="form-control {!! hasError('about_us_section_slogan') !!}" placeholder="About Us Section Slogan" />
-                                        @error('about_us_section_slogan')
-                                        {!! displayError($message) !!}
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label>Service Section Slogan {!! starSign() !!}</label>
-                                        <input type="text" name="service_section_slogan" value="{{ old('service_section_slogan') ?? siteSetting()['service_section_slogan'] ?? '' }}" class="form-control {!! hasError('service_section_slogan') !!}" placeholder="Service Section Slogan" />
-                                        @error('service_section_slogan')
-                                        {!! displayError($message) !!}
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label>Event Section Slogan {!! starSign() !!}</label>
-                                        <input type="text" name="event_section_slogan" value="{{ old('event_section_slogan') ?? siteSetting()['event_section_slogan'] ?? '' }}" class="form-control {!! hasError('event_section_slogan') !!}" placeholder="Event Section Slogan" />
-                                        @error('event_section_slogan')
-                                        {!! displayError($message) !!}
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label>Team Section Slogan {!! starSign() !!}</label>
-                                        <input type="text" name="team_section_slogan" value="{{ old('team_section_slogan') ?? siteSetting()['team_section_slogan'] ?? '' }}" class="form-control {!! hasError('team_section_slogan') !!}" placeholder="Team Section Slogan" />
-                                        @error('team_section_slogan')
-                                        {!! displayError($message) !!}
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label>FAQ Slogan {!! starSign() !!}</label>
-                                        <input type="text" name="faq_section_slogan" value="{{ old('faq_section_slogan') ?? siteSetting()['faq_section_slogan'] ?? '' }}" class="form-control {!! hasError('faq_section_slogan') !!}" placeholder="FAQ Slogan" />
-                                        @error('faq_section_slogan')
-                                        {!! displayError($message) !!}
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label>Contact Us Section Slogan {!! starSign() !!}</label>
-                                        <input type="text" name="contact_us_section_slogan" value="{{ old('contact_us_section_slogan') ?? siteSetting()['contact_us_section_slogan'] ?? '' }}" class="form-control {!! hasError('contact_us_section_slogan') !!}" placeholder="Contact Us Section Slogan" />
-                                        @error('contact_us_section_slogan')
-                                        {!! displayError($message) !!}
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label>Client Section Slogan {!! starSign() !!}</label>
-                                        <input type="text" name="client_section_slogan" value="{{ old('client_section_slogan') ?? siteSetting()['client_section_slogan'] ?? '' }}" class="form-control {!! hasError('client_section_slogan') !!}" placeholder="Client Section Slogan" />
-                                        @error('client_section_slogan')
-                                        {!! displayError($message) !!}
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label>Newsletter Section Slogan {!! starSign() !!}</label>
-                                        <input type="text" name="newsletter_section_slogan" value="{{ old('newsletter_section_slogan') ?? siteSetting()['newsletter_section_slogan'] ?? '' }}" class="form-control {!! hasError('newsletter_section_slogan') !!}" placeholder="Newsletter Section Slogan" />
-                                        @error('newsletter_section_slogan')
                                         {!! displayError($message) !!}
                                         @enderror
                                     </div>

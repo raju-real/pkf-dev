@@ -17,7 +17,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $results = News::latest()->paginate(50);
+        $results = News::latest()->paginate(10);
         return view('admin.news.news_list',compact('results'));
     }
 
@@ -44,7 +44,7 @@ class NewsController extends Controller
         $this->validate($request,[
             'category' => 'required|exists:news_categories,id',
             'title' => 'required|string|max:191',
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:5120',
+            'image' => 'required|image|mimes:png,jpg,jpeg|max:5120|dimensions:width=620,height=600',
             'description' => 'required|string|max:10000'
         ]);
 
@@ -66,9 +66,10 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $data = News::whereSlug($slug)->firstOrFail();
+        return view('admin.news.news_details',compact('data'));
     }
 
     /**
@@ -97,7 +98,7 @@ class NewsController extends Controller
         $this->validate($request,[
             'category' => 'required|exists:news_categories,id',
             'title' => 'required|string|max:191',
-            'image' => 'nullable|sometimes|image|mimes:png,jpg,jpeg|max:5120',
+            'image' => 'nullable|sometimes|image|mimes:png,jpg,jpeg|max:5120|dimensions:width=620,height=600',
             'description' => 'required|string|max:10000'
         ]);
 
@@ -106,6 +107,9 @@ class NewsController extends Controller
         $row->title = $request->title;
         $row->slug = Str::slug($request->title);
         if($request->file('image')) {
+            if(file_exists($row->image)) {
+                unlink($row->image);
+            }
             $row->image = uploadImage($request->file('image'),'assets/files/images/news/');
         }
         $row->description = $request->description;
