@@ -6,6 +6,11 @@ use App\Mail\SendMail;
 use App\Models\News;
 use App\Models\NewsCategory;
 use App\Models\PeopleDirectory;
+use App\Models\Publication;
+use App\Models\PublicationCategory;
+use App\Models\Service;
+use App\Models\ServiceCategory;
+use App\Models\ServiceSubcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -15,12 +20,63 @@ class HomePageController extends Controller
         return view('website.pages.home');
     }
 
+    public function allPublications() {
+        $data = Publication::query();
+        $data->latest();
+        $data->when(request()->get('SearchTerm'),function($query) {
+            $search = request()->get('SearchTerm');
+            $query->where('title','LIKE',"%{$search}%");
+        });
+        $data->when(request()->get('category'),function($query) {
+            $category_slug = request()->get('category');
+            $id = PublicationCategory::whereSlug($category_slug)->first()->id;
+            $query->where('category_id',$id);
+        });
+        // $grid_results = $data->skip(0)->take(4)->get();
+        // $list_results = $data->skip(4)->take(10)->paginate(6);
+        $results = $data->paginate(10);
+        return view('website.pages.publication_list',compact('results'));
+    }
+
+    public function publicationDetails($slug) {
+        $publication = Publication::whereSlug($slug)->first();
+        return view('website.pages.publication_details',compact('publication'));
+    }
+
+    public function allServices() {
+        $data = Service::query();
+        $data->latest();
+        $data->when(request()->get('SearchTerm'),function($query) {
+            $search = request()->get('SearchTerm');
+            $query->where('title','LIKE',"%{$search}%");
+        });
+        $data->when(request()->get('category'),function($query) {
+            $category_slug = request()->get('category');
+            $id = ServiceCategory::whereSlug($category_slug)->first()->id;
+            $query->where('category_id',$id);
+        });
+        $data->when(request()->get('subcategory'),function($query) {
+            $subcategory_slug = request()->get('subcategory');
+            $id = ServiceSubcategory::whereSlug($subcategory_slug)->first()->id;
+            $query->where('subcategory_id',$id);
+        });
+        // $grid_results = $data->skip(0)->take(4)->get();
+        // $list_results = $data->skip(4)->take(10)->paginate(6);
+        $results = $data->paginate(10);
+        return view('website.pages.service_list',compact('results'));
+    }
+
+    public function serviceDetails($slug) {
+        $service = Service::whereSlug($slug)->first();
+        return view('website.pages.service_details',compact('service'));
+    }
+
     public function allNews() {
         $data = News::query();
         $data->latest();
         $data->when(request()->get('SearchTerm'),function($query) {
             $search = request()->get('SearchTerm');
-            $query->where('title','LIKE',"%{$search}%")->orWhere('description',"LIKE","%{$search}%");
+            $query->where('title','LIKE',"%{$search}%");
         });
         $data->when(request()->get('category'),function($query) {
             $category_slug = request()->get('category');

@@ -41,12 +41,12 @@
                                     <td>{{ $loop->index + 1 }}</td>
                                     <td>
                                         <img src="{{ asset($data->image) }}" alt="" class="img-responsive"
-                                            height="50" width="50">
+                                            height="150" width="350">
                                     </td>
-                                    <td>{{ strLimit($data->title,50) }}</td>
-                                    <td>{{ strLimit($data->short_text,50) }}</td>
+                                    <td>{{ $data->title ?? "N/A" }}</td>
+                                    <td>{{ $data->short_text ?? "N/A" }}</td>
                                     <td>{{ $data->button_name ?? "N/A" }}</td>
-                                    <td>{{ strLimit($data->link,80) }}</td>
+                                    <td>{{ $data->link ?? "N/A" }}</td>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn btn-sm dropdown-toggle hide-arrow" data-toggle="dropdown">

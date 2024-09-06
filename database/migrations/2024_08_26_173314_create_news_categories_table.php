@@ -19,6 +19,7 @@ class CreateNewsCategoriesTable extends Migration
             $table->string('slug')->nullable();
             $table->string('description',400)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

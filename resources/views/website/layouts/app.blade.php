@@ -8,7 +8,7 @@
     <meta property="og:url" content="https://www.pkf.com/" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="PKF BD" />
-    <title>PKF BD</title>
+    <title> {{ siteSetting()['company_name'] ?? "PKF BD" }}</title>
     <link href="{{ asset('assets/website/Content/bootstrap.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/website/Content/all.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/website/css/PKF.css') }}" rel="stylesheet" />
@@ -316,13 +316,16 @@
                             </div>
                         </li> --}}
                         <li class="nav-item">
-                            <a class="nav-link" href="publications.html" title="Publications">Publications</a>
+                            <a class="nav-link" href="{{ route('all-publications') }}" title="Publications">Publications</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('all-news') }}" title="News &amp; Events">News &amp; Events</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('peoples') }}" title="People">People</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('our-services') }}" title="Services">Services</a>
                         </li>
                     </ul>
                 </div>
@@ -351,7 +354,7 @@
                     </ul>
                 </div>
                 <div class="col-sm py-2">
-                    <h3>Footer Heading</h3>
+                    <h3>Our Services</h3>
                     <ul>
                         <li><a href="#" title="Footer Item">Footer Item</a></li>
                         <li><a href="#" title="Footer Item">Footer Item</a></li>
@@ -360,18 +363,17 @@
                 <div class="col-sm py-2">
                     <h3>Follow us on...</h3>
                     <ul>
-                        <li><a href="https://twitter.com/" target="_blank" title="Twitter">Twitter</a></li>
-                        <li><a href="https://www.linkedin.com/" target="_blank" title="LinkedIn">LinkedIn</a></li>
-                        <li><a href="https://www.facebook.com/" target="_blank" title="Facebook">Facebook</a></li>
-                        <li><a href="https://www.linkedin.com/" target="_blank" title="LinkedIn">LinkedIn</a></li>
-                        <li><a href="https://www.facebook.com/" target="_blank" title="Facebook">Facebook</a></li>
+                        <li><a href="{{ asset(siteSetting()['twitter_url']) ?? '#' }}" target="_blank" title="Twitter">Twitter</a></li>
+                        <li><a href="{{ asset(siteSetting()['linkedin_url']) ?? '#' }}" target="_blank" title="LinkedIn">LinkedIn</a></li>
+                        <li><a href="{{ asset(siteSetting()['facebook_url']) ?? '#' }}" target="_blank" title="Facebook">Facebook</a></li>
+                        <li><a href="{{ asset(siteSetting()['instagram_url']) ?? '#' }}" target="_blank" title="Instagram">Instagram</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="footer-strap">
             <div class="container py-1 px-3">
-                2021 All Right Reserved | PKF International </div>
+                {{ date('Y',strtotime(today())) }} All Right Reserved | {{ siteSetting()['company_name'] ?? "PKF BD" }} </div>
         </div>
     </footer>
     <script src="{{ asset('assets/website/scripts/jquery.validate.min.js') }}"></script>

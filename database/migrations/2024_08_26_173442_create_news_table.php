@@ -21,6 +21,7 @@ class CreateNewsTable extends Migration
             $table->string('image',255);
             $table->longText('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

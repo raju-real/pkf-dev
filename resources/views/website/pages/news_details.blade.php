@@ -187,7 +187,7 @@
                             <div>
                                 <div class="row clearfix">
                                     <div class="col-md-12">
-                                        <img src="{{ asset($news->image) }}" />
+                                        <img src="{{ asset($news->image) }}" width="100%" height="auto" />
                                     </div>
                                     <div class="col-md-12">
                                         <div>

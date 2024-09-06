@@ -9,7 +9,10 @@ use Illuminate\Support\Str;
 use App\Models\MenuActivity;
 use App\Models\News;
 use App\Models\NewsCategory;
+use App\Models\Publication;
+use App\Models\PublicationCategory;
 use App\Models\Service;
+use App\Models\ServiceCategory;
 use App\Models\Slider;
 use App\Models\UserPermission;
 use Illuminate\Support\Facades\File;
@@ -325,6 +328,16 @@ if(! function_exists('allServices')) {
         return Service::latest()->get();
     }
 }
+if(! function_exists('serviceCategories')) {
+    function serviceCategories() {
+        return ServiceCategory::with([
+            'subcategories' => function($query) {
+                $query->orderBy('name');
+            }
+        ])->latest()->orderBy('name')->get();
+    }
+}
+
 if(! function_exists('featuredNews')) {
     function featuredNews() {
         return News::latest()->where('category_id',1)->first();
@@ -335,6 +348,18 @@ if(! function_exists('allDepartment')) {
         return Department::latest()->orderBy('name')->get();
     }
 }
+if(! function_exists('publicationCategories')) {
+    function publicationCategories() {
+        return PublicationCategory::latest()->orderBy('name')->get();
+    }
+}
+if(! function_exists('allPublications')) {
+    function allPublications() {
+        return Publication::latest()->take(3)->get();
+    }
+}
+
+
 
 
 

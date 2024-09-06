@@ -12,6 +12,12 @@ Route::get('news-details/{slug}','HomePageController@newsDetails')->name('news-d
 Route::get('peoples','HomePageController@allPeoples')->name('peoples');
 Route::get('people/{slug}','HomePageController@peopleDetails')->name('people');
 
+Route::get('our-services','HomePageController@allServices')->name('our-services');
+Route::get('service-details/{slug}','HomePageController@serviceDetails')->name('service-details');
+
+Route::get('all-publications','HomePageController@allPublications')->name('all-publications');
+Route::get('publication-details/{slug}','HomePageController@publicationDetails')->name('publication-details');
+
 
 // Admin part
 Route::namespace('Admin')->group(function() {
@@ -22,6 +28,8 @@ Route::namespace('Admin')->group(function() {
         Route::get('dashboard','DashboardController@dashboard')->name('dashboard');
 
         Route::resource('sliders','SliderController');
+        Route::resource('publication-categories','PublicationCategoryController');
+        Route::resource('publications','PublicationController');
         Route::resource('news-categories','NewsCategoryController');
         Route::resource('news','NewsController');
         Route::resource('departments','DepartmentController');

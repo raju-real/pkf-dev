@@ -17,8 +17,10 @@ class CreateServiceSubcategoriesTable extends Migration
             $table->id();
             $table->integer('category_id');
             $table->string('name')->nullable();
+            $table->string('slug',255)->nullable();
             $table->string('description',400)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

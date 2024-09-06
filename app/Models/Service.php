@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Service extends Model
 {
+    use SoftDeletes;
+    
     protected $table = "services";
 
     public function category() {
@@ -13,6 +16,6 @@ class Service extends Model
     }
 
     public function subcategory() {
-        return $this->belongsTo(ServiceCategory::class,'subcategory_id','id');
+        return $this->belongsTo(ServiceSubcategory::class,'subcategory_id','id');
     }
 }

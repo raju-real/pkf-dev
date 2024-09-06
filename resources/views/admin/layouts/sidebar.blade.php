@@ -75,7 +75,27 @@
                 <li>
                     <a class="d-flex align-items-center child-menu" href="{{ route('admin.news-categories.index') }}">
                         <i data-feather="circle"></i>
-                        <span class="menu-item text-truncate" data-i18n="List">News Category</span>
+                        <span class="menu-item text-truncate" data-i18n="List">Category</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item parent-menu">
+            <a class="d-flex align-items-center" href="#">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+                <span class="menu-title text-truncate">Insights</span>
+            </a>
+            <ul class="menu-content">
+                <li>
+                    <a class="d-flex align-items-center child-menu" href="{{ route('admin.publications.index') }}">
+                        <i data-feather="circle"></i>
+                        <span class="menu-item text-truncate" data-i18n="List">Publications</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="d-flex align-items-center child-menu" href="{{ route('admin.publication-categories.index') }}">
+                        <i data-feather="circle"></i>
+                        <span class="menu-item text-truncate" data-i18n="List">Category</span>
                     </a>
                 </li>
             </ul>

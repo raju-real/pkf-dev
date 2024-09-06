@@ -68,38 +68,24 @@
 
 <section id='publications' class='bg4 p-3'>
     <div class='container p-3'>
-        <a href="publications.html" class='corner-btn right'>See all publications</a>
+        <a href="{{ route('all-publications') }}" class='corner-btn right'>See all publications</a>
         <h2>Publications</h2>
         <div class='row clear'>
+            @foreach(allPublications() as $publication)
             <div class='col-sm-6 col-md-4 p-3'>
                 <div class='publication-item p-3'
-                    style="background-image:url('{{ asset('assets/website/media/default-image-620x600.jpg') }}');">
-                    <h4><a href="#" title="Lorem ipsum dolor sit amet" class='txtshadow'>Lorem ipsum
-                            dolor sit amet</a></h4>
-                    <a href='publications.html' class='readmore'>View here</a>
+                    style="background-image:url('{{ asset($publication->image) }}');">
+                    <h4><a href="{{ route('publication-details',$publication->slug) }}" title="Lorem ipsum dolor sit amet" class='txtshadow'>{{ strLimit($publication->title,100) }}</a></h4>
+                    <a href='{{ route('publication-details',$publication->slug) }}' class='readmore'>View here</a>
                 </div>
             </div>
-            <div class='col-sm-6 col-md-4 p-3'>
-                <div class='publication-item p-3'
-                    style="background-image:url('{{ asset('assets/website/media/default-image-620x600.jpg') }}');">
-                    <h4><a href="#" title="Lorem ipsum dolor sit amet" class='txtshadow'>Lorem ipsum
-                            dolor sit amet</a></h4>
-                    <a href='publications.html' class='readmore'>View here</a>
-                </div>
-            </div>
-            <div class='col-sm-6 col-md-4 p-3'>
-                <div class='publication-item p-3'
-                    style="background-image:url('{{ asset('assets/website/media/default-image-620x600.jpg') }}');">
-                    <h4><a href="#" title="Lorem ipsum dolor sit amet" class='txtshadow'>Lorem ipsum
-                            dolor sit amet</a></h4>
-                    <a href='publications.html' class='readmore'>View here</a>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
 <section class='container p-3 mt-3' id='homenews'>
     <div class='row'>
+        @if(!empty(featuredNews()))
         <div class='col-md-5 h-100'>
             <div class='title p-3'>
                 <span>{{ date('Y-m-d',strtotime(featuredNews()->created_at)) }}</span>
@@ -108,6 +94,8 @@
             <img src="{{ asset(featuredNews()->image) }}" class="w-100"/>
             <a href="{{ route('news-details',featuredNews()->slug) }}" title="Read more" class="readmore newsitem1">Read more</a>
         </div>
+        @endif
+        
         <div class='col-md-7 p-3'>
             <a href="{{ route('all-news') }}" class='corner-btn right'>All News</a>
             <h2>Latest News</h2>

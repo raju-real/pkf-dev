@@ -43,21 +43,23 @@
                     </div>
                     <div class="row gridbg">
                         @foreach($results as $news)
-                        @if($loop->index < 4)
+                        @if($loop->index <= 4)
                         <div class="col-md-6 p-3 list-item">
                             <img src="{{ asset($news->image) }}" />
                             <h5 class="mt-3">{{ $news->category->name ?? "" }} - {{ date('Y-m-d',strtotime($news->created_at)) }}</h5>
                             <h4 class="mt-3">{{ $news->title ?? "" }}</h4>
-                            <p>{!! strLimit($news->description,400) !!}</p>
+                            <p>{!! strLimit($news->description,200) !!}</p>
                             <a class="readmore" href="{{ route('news-details',$news->slug) }}" title="Read more">Read more</a>
                         </div>
                         @endif
-                        
-                        @if($loop->index > 3)
+                        @endforeach
+
+                        @foreach($results as $news)
+                        @if($loop->index >= 4)
                         <div class="p-3 list-item">
                             <h5 class="mt-3">{{ $news->category->name ?? "" }} - {{ date('Y-m-d',strtotime($news->created_at)) }}</h5>
                             <h4 class="mt-3">{{ $news->title ?? "" }}</h4>
-                            <p>{!! strLimit($news->description,400) !!}</p>
+                            <p>{!! strLimit($news->description,200) !!}</p>
                             <a class="readmore" href="{{ route('news-details',$news->slug) }}" title="Read more">Read more</a>
                         </div>
                         @endif

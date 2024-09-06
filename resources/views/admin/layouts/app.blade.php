@@ -46,6 +46,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/calendars/fullcalendar.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/custom.css') }}">
 
         
     <style>

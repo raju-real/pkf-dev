@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Service;
-use App\Models\ServiceCategory;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\ServiceCategory;
+use App\Http\Controllers\Controller;
 
 class ServiceController extends Controller
 {
@@ -52,6 +53,7 @@ class ServiceController extends Controller
         $row->category_id = $request->category;
         $row->subcategory_id = $request->subcategory;
         $row->title = $request->title;
+        $row->slug = Str::slug($request->title);
         $row->description = $request->description;
         if($request->file('icon')) {
             $row->icon = uploadImage($request->file('icon'),'assets/files/images/services/');
@@ -106,6 +108,7 @@ class ServiceController extends Controller
         $row->category_id = $request->category;
         $row->subcategory_id = $request->subcategory;
         $row->title = $request->title;
+        $row->slug = Str::slug($request->title);
         $row->description = $request->description;
         if($request->file('icon')) {
             if(file_exists($row->icon)) {

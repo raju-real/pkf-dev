@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\ServiceCategory;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\ServiceCategory;
+use App\Http\Controllers\Controller;
 
 class ServiceCategoryController extends Controller
 {
@@ -45,6 +46,7 @@ class ServiceCategoryController extends Controller
 
         $row = new ServiceCategory();
         $row->name = $request->name;
+        $row->slug = Str::slug($request->name);
         $row->description = $request->description;
         $row->save();
         return redirect()->route('admin.service-categories.index')->with(savedMessage());
@@ -90,6 +92,7 @@ class ServiceCategoryController extends Controller
 
         $row = ServiceCategory::findOrFail($id);
         $row->name = $request->name;
+        $row->slug = Str::slug($request->name);
         $row->description = $request->description;
         $row->save();
         return redirect()->route('admin.service-categories.index')->with(updateMessage());

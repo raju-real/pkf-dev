@@ -25,6 +25,7 @@ class CreatePeopleDirectoriesTable extends Migration
             $table->string('linkedin_link',255)->nullable();
             $table->longText('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

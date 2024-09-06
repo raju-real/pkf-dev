@@ -22,6 +22,7 @@ class CreateSlidersTable extends Migration
             $table->string('image',255)->nullable();
             $table->integer('order_no')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

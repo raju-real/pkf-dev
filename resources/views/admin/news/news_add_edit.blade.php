@@ -70,7 +70,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-12 col-12">
                                     <div class="form-group">
                                         <label>Description {!! starSign() !!}</label>
@@ -82,7 +81,7 @@
                                 </div>
                                 
                                 <div class="col-12 text-right">
-                                    <a href="{{ route('admin.news.index') }}" class="btn btn-info">Back</a>
+                                    <a href="{{ url()->previous() ?? route('admin.dashboard') }}" class="btn btn-info">Back</a>
                                     <x-submit-button-component />
                                 </div>
                             </div>
