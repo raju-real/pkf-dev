@@ -1,6 +1,13 @@
 <?php
 
 use Illuminate\Support\Str;
+$url = url('/');
+$conneciton = "";
+if($url === 'http://pkf-dev.test') {
+    $conneciton = 'dev_server';
+} else {
+    $conneciton = 'live_server';
+}
 
 return [
 
@@ -15,7 +22,7 @@ return [
     |
     */
 
-    'default' => 'dev_server',
+    'default' => $conneciton,
 
     /*
     |--------------------------------------------------------------------------
@@ -68,9 +75,9 @@ return [
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'mkgroup1_db'),
-            'username' => env('DB_USERNAME', 'mkgroup1_user'),
-            'password' => env('DB_PASSWORD', 'Raju@7258'),
+            'database' => env('DB_DATABASE', 'pkfaxywe_demo'),
+            'username' => env('DB_USERNAME', 'pkfaxywe_demo'),
+            'password' => env('DB_PASSWORD', '#A-LWYL[VBcy'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
