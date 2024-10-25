@@ -1,404 +1,248 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta property="og:url" content="https://www.pkf.com/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="PKF BD" />
-    <title> {{ siteSetting()['company_name'] ?? "PKF BD" }}</title>
-    <link href="{{ asset('assets/website/Content/bootstrap.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/website/Content/all.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/website/css/PKF.css') }}" rel="stylesheet" />
-    <script src="{{ asset('assets/website/scripts/jquery-3.0.0.min.js') }}"></script>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>{{ siteSetting()['company_name'] ?? 'PKF BD' }}</title>
+    <meta name="base-url" base_url="{!! url('/') !!}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
 
-    <style>
-        /* Make the navbar sticky */
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background-color: #fff; /* Optional: Background color for navbar */
-        }
-    
-        /* Align logo and navbar items side by side */
-        .navbar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-    
-        /* Style for the logo */
-        #LogoBox {
-            display: flex;
-            align-items: center;
-        }
-    
-        #Logo {
-            width: 150px; /* Adjust the width of the logo */
-            height: 50px; /* Adjust the height of the logo */
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            display: block;
-        }
-    
-        /* Style for the navbar items */
-        .navbar-nav {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-        }
-    
-        .navbar-nav .nav-item {
-            margin-left: 20px; /* Space between nav items */
-        }
-    
-        .navbar-toggler {
-            margin-left: auto;
-        }
-    
-        /* Ensure the navbar is responsive */
-        @media (max-width: 992px) {
-            .navbar .container {
-                flex-direction: column;
-            }
-    
-            .navbar-nav {
-                flex-direction: column;
-            }
-    
-            #Logo {
-                margin-bottom: 10px;
-            }
-        }
-    </style>
+    <!-- Favicons -->
+    <link href="assets/img/logo/favicon.ico" rel="icon">
+    <link href="assets/img/logo/favicon.ico" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{ asset('assets/user/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/user/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/user/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="{{ asset('assets/user/css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/user/css/responsive.css') }}" rel="stylesheet">
 </head>
 
-<body>
+<body class="index-page">
+    <header id="header" class="header sticky-top {{ url()->current() === url('/') ? '' : 'heading-2' }}">
+        <div class="branding d-flex align-items-center">
+            <div class="container position-relative d-flex align-items-center justify-content-between">
+                <a href="{{ route('home') }}" class="logo d-flex align-items-center">
+                    <img src="assets/img/logo/pkf-2-logo.svg" alt="">
+                </a>
+                <nav id="navmenu" class="navmenu">
+                    <ul>
+                        @include('website.layouts.menus')
+                    </ul>
+                    <i class="mobile-nav-toggle d-xl-none  bi bi-list"></i>
+                </nav>
+                <div class="end-menu">
+                    <li class="d-flex align-items-center request-callback">
+                        <a href="#">Request Call Back</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="bi bi-globe"></i>
+                            <span class="ln-title">English</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><span class="ln-active">Arabic</span></a></li>
+                            <li><a class="dropdown-item" href="#"><span>Bangla</span></a></li>
+                            <li><a class="dropdown-item" href="#"><span>English</span></a></li>
+                        </ul>
+                    </li>
+                    <a class="search-trigger" href="javascript:void(0)"><i class="bi bi-search"></i></a>
+                    <a class="bar-trigger search-content" href="javascript:void(0)">
+                        <i class="bi bi-list"></i>
+                    </a>
+                    <div id="MainNav" class="">
+                        <nav class="mt-2 mobile_menu_inner">
+                            <div class="d-flex justify-content-end align-items-center">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-globe"></i>
+                                        <span class="ln-title">English</span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#"><span
+                                                    class="ln-active">Arabic</span></a></li>
+                                        <li><a class="dropdown-item" href="#"><span>Bangla</span></a></li>
+                                        <li><a class="dropdown-item" href="#"><span>English</span></a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="search-trigger-2" href="javascript:void(0)"><i
+                                            class="bi bi-search"></i></a>
+                                    <div id="mySearchbar-2" class="mySearchbar-2">
+                                        <a href="javascript:void(0)" class="mySearchClosebtn search-content">
+                                            <button type="button"
+                                                class="btn search-btn search-content">Search</button>
+                                        </a>
+                                        <div class="d-flex align-items-center">
+                                            <span>Search:</span>
+                                            <input type="text" class="form-control" placeholder="Enter Keywords">
 
-    <div id="LogoBox" class="container">
-        <a href="{{ route('home') }}" id="Logo"
-            style="background-image:url('{{ asset('assets/website/media/logo.png') }}');">Home</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
-        </button>
-        <nav class="navbar navbar-expand-lg">
-            <div class="container">
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li id="StickyLogo"><a href="{{ route('home') }}"
-                                style="background-image:url('{{ asset('assets/website/media/logo.png') }}');">Home</a>
-                        </li>
-    
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{{ route('home') }}" title="Home">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="content.html" title="Content">Content</a>
-                        </li>
-                        {{-- <li class="nav-item">
-                            <a class="nav-link dropdown-toggle" href="#" title="Dropdown"
-                                id="navbarDropdownMenuLink-services" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <div class="dropdown-menu mega-menu-bg w-100" aria-labelledby="navbarDropdownMenuLink-services">
-                                <div class="container">
-                                    <div class="card-columns">
-                                        <div class="card custom-card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="d-none d-lg-block col-md-2 col-lg-2 pl-0 pr-0">
-                                                        <img src="{{ asset('assets/website/media/icons/mega-nav-icon-advisory.png') }}"
-                                                            alt="" />
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-10 col-lg-10 pl-2">
-                                                        <ul>
-                                                            <li><a href="#">
-                                                                    <h5>Menu Heading</h5>
-                                                                </a></li>
-                                                            <li>
-                                                                <a href="#" class='' title="Menu Item">Menu
-                                                                    Item</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class='' title="Menu Item">Menu
-                                                                    Item</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class='' title="Menu Item">Menu
-                                                                    Item</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class='' title="Menu Item">Menu
-                                                                    Item</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class='' title="Menu Item">Menu
-                                                                    Item</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class='' title="Menu Item">Menu
-                                                                    Item</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class='' title="Menu Item">Menu
-                                                                    Item</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class='' title="Menu Item">Menu
-                                                                    Item</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class='' title="Menu Item">Menu
-                                                                    Item</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card custom-card">
-                                            <div class="card-body">
-    
-    
-                                                <div class="row">
-                                                    <div class="d-none d-lg-block col-md-2 col-lg-2 pl-0 pr-0">
-                                                        <img src="{{ asset('assets/website/media/icons/mega-nav-icon-taxlegal.png') }}"
-                                                            alt="" />
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-10 col-lg-10 pl-2">
-                                                        <ul>
-                                                            <li><a href="#">
-                                                                    <h5>Menu Heading</h5>
-                                                                </a></li>
-    
-                                                            <li>
-                                                                <a href="#" class='' title="Menu Item">Menu
-                                                                    Item</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class='' title="Menu Item">Menu
-                                                                    Item</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class='' title="Menu Item">Menu
-                                                                    Item</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class='' title="Menu Item">Menu
-                                                                    Item</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class='' title="Menu Item">Menu
-                                                                    Item</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class='' title="Menu Item">Menu
-                                                                    Item</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class='' title="Menu Item">Menu
-                                                                    Item</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class='' title="Menu Item">Menu
-                                                                    Item</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card custom-card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="d-none d-lg-block col-md-2 col-lg-2 pl-0 pr-0">
-                                                        <img src="{{ asset('assets/website/media/icons/mega-nav-icon-assurance.png') }}"
-                                                            alt="" />
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-10 col-lg-10 pl-2">
-                                                        <ul>
-                                                            <li><a href="#">
-                                                                    <h5>Menu Heading</h5>
-                                                                </a></li>
-                                                            <li>
-                                                                <a href="#" class='' title="Menu Item">Menu
-                                                                    Item</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class='' title="Menu Item">Menu
-                                                                    Item</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class='' title="Menu Item">Menu
-                                                                    Item</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card custom-card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="d-none d-lg-block col-md-2 col-lg-2 pl-0 pr-0">
-                                                        <img src="{{ asset('assets/website/media/icons/mega-nav-icon-bussol.png') }}"
-                                                            alt="" />
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-10 col-lg-10 pl-2">
-                                                        <ul>
-                                                            <li><a href="#">
-                                                                    <h5>Menu Heading</h5>
-                                                                </a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card custom-card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="d-none d-lg-block col-md-2 col-lg-2 pl-0 pr-0">
-                                                        <img src="{{ asset('assets/website/media/icons/mega-nav-icon-corpfinance.png') }}"
-                                                            alt="" />
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-10 col-lg-10 pl-2">
-                                                        <ul>
-                                                            <li><a href="#">
-                                                                    <h5>Menu Heading</h5>
-                                                                </a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card custom-card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="d-none d-lg-block col-md-2 col-lg-2 pl-0 pr-0">
-                                                        <img src="{{ asset('assets/website/media/icons/mega-nav-icon-specialisthospitalityconsulting.png') }}"
-                                                            alt="" />
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-10 col-lg-10 pl-2">
-                                                        <ul>
-                                                            <li><a href="#">
-                                                                    <h5>Menu Heading</h5>
-                                                                </a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card custom-card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="d-none d-lg-block col-md-2 col-lg-2 pl-0 pr-0">
-                                                        <img src="{{ asset('assets/website/media/icons/mega-nav-icon-allservices.png') }}"
-                                                            alt="" />
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-10 col-lg-10 pl-2">
-                                                        <ul>
-                                                            <li><a href="#">
-                                                                    <h5>Menu Heading</h5>
-                                                                </a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
-                                </div>
+                                </li>
+                                <button class="btn bar-trigger-2" href="javascript:void(0)">
+                                    <i class="bi bi-x-lg"></i>
+                                </button>
                             </div>
-                        </li> --}}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('all-publications') }}" title="Publications">Publications</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('all-news') }}" title="News &amp; Events">News &amp; Events</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('peoples') }}" title="People">People</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('our-services') }}" title="Services">Services</a>
-                        </li>
-                    </ul>
+                            <ul class="m-menu">
+                                @include('website.layouts.menus')
+                            </ul>
+                            <div class="NavSocial">
+                                <a class="" href="#">
+                                    <i class="bi bi-facebook"></i>
+                                </a>
+                                <a class="" href="#">
+                                    <i class="bi bi-linkedin"></i>
+                                </a>
+                                <a class="" href="#">
+                                    <i class="bi bi-instagram"></i>
+                                </a>
+                                <a class="" href="#">
+                                    <i class="bi bi-wechat"></i>
+                                </a>
+                            </div>
+                        </nav>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </div>
-    
-    
-    <main>
+        </div>
+        <div id="mySearchbar" class="mySearchbar">
+            <a href="javascript:void(0)" class="mySearchClosebtn">
+                <button class="btn search-btn search-content">Search</button>
+            </a>
+            <div class="d-flex align-items-center">
+                <span>Search:</span>
+                <input type="text" name="SearchTerm" value="{{ request('SearchTerm') }}" class="form-control search-content-box"
+                      placeholder="Search">
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
         @yield('content')
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-blue">
-        <div class="container">
-            <div class="row py-4">
+    <footer id="footer" class="footer light-background">
+        <div class="container footer-top">
+            <div class="row gy-4">
+                <div class="col-lg-4 col-md-12 footer-about">
+                    <a href="index.html" class="logo d-flex align-items-center">
+                        <span class="sitename">
+                            <img src="assets/img/logo/pkf-2-logo.svg" alt="">
+                        </span>
+                    </a>
 
-                <div class="col-sm py-2">
-                    <h3>Footer Heading</h3>
-                    <ul>
-                        <li><a href="content.html" title="Content">Content</a></li>
-                        <li><a href="#" title="Footer Item">Footer Item</a></li>
-                        <li><a href="#" title="Footer Item">Footer Item</a></li>
-                        <li><a href="#" title="Footer Item">Footer Item</a></li>
-                        <li><a href="#" title="Footer Item">Footer Item</a></li>
-                    </ul>
                 </div>
-                <div class="col-sm py-2">
-                    <h3>Our Services</h3>
-                    <ul>
-                        <li><a href="#" title="Footer Item">Footer Item</a></li>
-                        <li><a href="#" title="Footer Item">Footer Item</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm py-2">
-                    <h3>Follow us on...</h3>
-                    <ul>
-                        <li><a href="{{ asset(siteSetting()['twitter_url']) ?? '#' }}" target="_blank" title="Twitter">Twitter</a></li>
-                        <li><a href="{{ asset(siteSetting()['linkedin_url']) ?? '#' }}" target="_blank" title="LinkedIn">LinkedIn</a></li>
-                        <li><a href="{{ asset(siteSetting()['facebook_url']) ?? '#' }}" target="_blank" title="Facebook">Facebook</a></li>
-                        <li><a href="{{ asset(siteSetting()['instagram_url']) ?? '#' }}" target="_blank" title="Instagram">Instagram</a></li>
-                    </ul>
+                <div class="col-lg-8 col-md-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 footer-links">
+                            <h4>Follow Us</h4>
+                            <div class="social-links d-flex mt-4">
+                                <a href="{{ siteSetting()['facebook_url'] ?? '#' }}"><i class="bi bi-facebook"></i></a>
+                                <a href="{{ siteSetting()['linkedin_url'] ?? '#' }}"><i class="bi bi-linkedin"></i></a>
+                                <a href="{{ siteSetting()['instagram_url'] ?? '#' }}"><i class="bi bi-instagram"></i></a>
+                                <a href="{{ siteSetting()['wechat_url'] ?? '#' }}"><i class="bi bi-wechat"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 footer-links">
+                            <h4>Services</h4>
+                            <ul>
+                                <li><a href="#">Audit & Assurance</a></li>
+                                <li><a href="#">Tax</a></li>
+                                <li><a href="#">Advisory</a></li>
+                                <li><a href="#">Corporate Service</a></li>
+                                <li><a href="#">View All</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-md-6 footer-links">
+                            <h4>Links</h4>
+                            <ul>
+                                <li><a href="#">PKF Shenzhen</a></li>
+                                <li><a href="#">Web Development</a></li>
+                                <li><a href="#">PKF.com</a></li>
+                                <li><a href="#">WeChat</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-md-6 footer-links">
+                            <h4>Resource</h4>
+                            <ul>
+                                <li><a href="#">Careers</a></li>
+                                <li><a href="#">Sitemap</a></li>
+                                <li><a href="#">Cookie Policy</a></li>
+                                <li><a href="#">Disclaimer</a></li>
+                                <li><a href="#">Privacy & Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="footer-strap">
-            <div class="container py-1 px-3">
-                {{ date('Y',strtotime(today())) }} All Right Reserved | {{ siteSetting()['company_name'] ?? "PKF BD" }} </div>
+        <div class="container copyright mt-4">
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <p>© <strong class="px-1 sitename">{{ siteSetting()['company_name'] ?? 'PKF' }}</strong> 
+                        <span>{{ date('Y',strtotime(now())) }}</span>
+                        <span>.All Rights Reserved</span>
+                    </p>
+                </div>
+                <div class="col-md-6 col-lg-8">
+                    <p>{!! siteSetting()['footer_text'] ?? '' !!}</p>
+                </div>
+            </div>
         </div>
-    </footer>
-    <script src="{{ asset('assets/website/scripts/jquery.validate.min.js') }}"></script>
-    <script src="{{ asset('assets/website/scripts/jquery.validate.unobtrusive.min.js') }}"></script>
-    <script src="{{ asset('assets/website/scripts/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/website/scripts/custom-app.js') }}"></script>
-    <script src="{{ asset('assets/website/scripts/BackToTop.js') }}"></script>
 
-    <script type="text/javascript">
-        $(function() {
-            $('#Carousel').carousel();
+    </footer>
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Vendor JS Files -->
+    <script src="{{ asset('assets/user/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- Main JS File -->
+    <script src="{{ asset('assets/user/js/main.js') }}"></script>
+    <script src="{{ asset('assets/user/js/custom.js') }}"></script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
-    </script>
-    <!-- swipe start -->
-    <script src='{{ asset('assets/website/scripts/jquery.touchSwipe.min.js') }}'></script>
-    <script type="text/javascript">
-        $("#Carousel").swipe({
-            swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
-                if (direction == 'left') $(this).carousel('next');
-                if (direction == 'right') $(this).carousel('prev');
-            },
-            allowPageScroll: "vertical"
-        });
-    </script>
-    <!-- swipe end -->
+
+      $(document).on('click', '.search-content', function() {
+          const searchTerm = $('.search-content-box').val();
+          window.location.href = `search?SearchTerm=${encodeURIComponent(searchTerm)}`;
+      });
+  
+      $(document).on('keydown', '.search-content-box', function(event) {
+          if (event.key === 'Enter') { // Check if Enter key is pressed
+              event.preventDefault(); // Prevent the default form submission
+              const searchTerm = $('.search-content-box').val();
+              window.location.href = `search?SearchTerm=${encodeURIComponent(searchTerm)}`;
+          }
+      });
+  </script>
+  @stack('js')
+  
 
 </body>
 

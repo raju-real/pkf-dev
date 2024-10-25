@@ -1,19 +1,16 @@
 <?php
-$jsonString = file_get_contents('assets/json/smtp.json');
-$smtp_info = json_decode($jsonString,true);
-
 return [
 
     'default' => env('MAIL_MAILER', 'smtp'),
 
     'mailers' => [
         'smtp' => [
-            'transport' => $smtp_info['mail_driver'],
-            'host' => $smtp_info['mail_host'],
-            'port' => $smtp_info['mail_port'],
-            'encryption' => $smtp_info['mail_encryption'],
-            'username' => $smtp_info['mail_username'],
-            'password' => $smtp_info['mail_password'],
+            'transport' => 'smtp',
+            'host' => 'smtp.gmail.com',
+            'port' => 587,
+            'encryption' => 'tls',
+            'username' => 'mkraju.eatl@gmail.com',
+            'password' => 'idiulnzjfqyiwycl',
             'timeout' => null,
             'auth_mode' => null,
         ],
@@ -47,8 +44,8 @@ return [
 
 
     'from' => [
-        'address' => $smtp_info['mail_from'],
-        'name' => $smtp_info['from_name'],
+        'address' => 'mkraju.eatl@gmail.com',
+        'name' => 'RAJU EATL',
     ],
 
     /*

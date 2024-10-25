@@ -70,7 +70,18 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-8 col-12">
+                                <div class="col-md-4 col-12">
+                                    <div class="form-group">
+                                        <label>Background Color</label>
+                                        <input type="color" name="bg_color"
+                                            value="{{ old('bg_color') ?? $data->bg_color ?? '' }}"
+                                            class="form-control {!! hasError('bg_color') !!}" placeholder="Background Color" />
+                                        @error('bg_color')
+                                        {!! displayError($message) !!}
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-12">
                                     <div class="form-group">
                                         <label>Redirect Link</label>
                                         <input type="text" name="link"

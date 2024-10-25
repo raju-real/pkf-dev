@@ -245,15 +245,15 @@
 
 
     <script src="{{ asset('assets/admin/js/custom/common.js') }}"></script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
     @stack('js')
 
-
-    {{-- <script>
-        $(window).on('load', function() {
-            
-            
-        })
-    </script> --}}
 
 </body>
 <!-- END: Body-->

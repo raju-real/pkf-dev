@@ -309,21 +309,28 @@
                                 <td style="padding: 0 2.5em; text-align: left;">
                                     <div class="text">
                                         <h3>{{ $mail_data['title'] ?? "" }}</h3>
-                                        <p>
-                                            @isset($mail_data['name'])
-                                                Name: {{ $mail_data['name'] }}
-                                                <br>
-                                            @endisset
-
-                                            @isset($mail_data['email'])
-                                                Email: {{ $mail_data['email'] }}
-                                            @endisset
-                                        </p>
                                         <p>Dear <b>{{ $mail_data['user_name'] ?? "Admin" }}</b>, </p>
                                         <p style="line-height: 20px;">
                                             
                                             {!! $mail_data['body'] !!}
                                         </p>
+                                        <p>
+                                            Regards,
+                                            <br>
+                                            @isset($mail_data['name'])
+                                                Name: {{ $mail_data['name'] }}
+                                                <br>
+                                            @endisset
+                                            @isset($mail_data['mobile'])
+                                                Mobile: {{ $mail_data['mobile'] }}
+                                                <br>
+                                            @endisset
+                                            @isset($mail_data['email'])
+                                                Email: {{ $mail_data['email'] }}
+                                                <br>
+                                            @endisset
+                                        </p>
+                                        
                                     </div>
                                 </td>
                             </tr>

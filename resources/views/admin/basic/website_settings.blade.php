@@ -21,7 +21,7 @@
                 <x-alert-component />
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('admin.update-website-settings') }}" class="form" method="POST">
+                        <form action="{{ route('admin.update-website-settings') }}" class="form" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row">
@@ -66,6 +66,15 @@
                                         <label>Fax</label>
                                         <input type="text" name="fax" value="{{ old('fax') ?? siteSetting()['fax'] ?? '' }}" class="form-control {!! hasError('fax') !!}" placeholder="Fax" />
                                         @error('fax')
+                                        {!! displayError($message) !!}
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    <div class="form-group">
+                                        <label>Welcome Message Title</label>
+                                        <input type="text" name="welcome_message_title" value="{{ old('welcome_message_title') ?? siteSetting()['welcome_message_title'] ?? '' }}" class="form-control {!! hasError('welcome_message_title') !!}" placeholder="Welcome Message Title" />
+                                        @error('welcome_message_title')
                                         {!! displayError($message) !!}
                                         @enderror
                                     </div>
@@ -119,9 +128,9 @@
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label>Twitter URL</label>
-                                        <input type="text" name="twitter_url" value="{{ old('twitter_url') ?? siteSetting()['twitter_url'] ?? '' }}" class="form-control {!! hasError('twitter_url') !!}" placeholder="Twitter URL" />
-                                        @error('twitter_url')
+                                        <label>Wechat URL</label>
+                                        <input type="text" name="wechat_url" value="{{ old('wechat_url') ?? siteSetting()['wechat_url'] ?? '' }}" class="form-control {!! hasError('wechat_url') !!}" placeholder="Wechat URL" />
+                                        @error('wechat_url')
                                         {!! displayError($message) !!}
                                         @enderror
                                     </div>
@@ -140,6 +149,24 @@
                                         <label>Google Map URL{!! starSign() !!}</label>
                                         <input type="text" name="google_map_url" value="{{ old('google_map_url') ?? siteSetting()['google_map_url'] ?? '' }}" class="form-control {!! hasError('google_map_url') !!}" placeholder="Google Map URL" />
                                         @error('google_map_url')
+                                        {!! displayError($message) !!}
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-12">
+                                    <div class="form-group">
+                                        <label>About Us Title{!! starSign() !!}</label>
+                                        <input type="text" name="about_us_title" value="{{ old('about_us_title') ?? siteSetting()['about_us_title'] ?? '' }}" class="form-control {!! hasError('about_us_title') !!}" placeholder="About Us Title" />
+                                        @error('about_us_title')
+                                        {!! displayError($message) !!}
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    <div class="form-group">
+                                        <label>About Us Image</label>
+                                        <input type="file" name="about_us_image" accept=".jpg,.png,.jpeg" class="form-control {!! hasError('about_us_image') !!}" />
+                                        @error('about_us_image')
                                         {!! displayError($message) !!}
                                         @enderror
                                     </div>
@@ -171,6 +198,16 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="col-md-12 col-12">
+                                    <div class="form-group">
+                                        <label>Footer Text</label>
+                                        <textarea name="footer_text" class="form-control p-0 {!! hasError('footer_text') !!}" cols="30" rows="5" placeholder="Footer Text">{{ old('footer_text') ?? siteSetting()['footer_text'] ?? '' }}</textarea>
+                                        @error('footer_text')
+                                        {!! displayError($message) !!}
+                                        @enderror
+                                    </div>
+                                </div>
+                                
                                 
                                 <div class="col-12 text-right">
                                     <x-submit-button-component />

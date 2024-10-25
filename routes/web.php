@@ -18,12 +18,17 @@ Route::get('service-details/{slug}','HomePageController@serviceDetails')->name('
 Route::get('all-publications','HomePageController@allPublications')->name('all-publications');
 Route::get('publication-details/{slug}','HomePageController@publicationDetails')->name('publication-details');
 
+Route::get('about','HomePageController@aboutUs')->name('about');
+Route::get('contact','HomePageController@contactUs')->name('contact');
+Route::post('send-contact-message','HomePageController@storeMessage')->name('send-contact-message');
+Route::get('search','HomePageController@searchContent')->name('search-content');
+
 
 // Admin part
 Route::namespace('Admin')->group(function() {
     Route::get('admin','AdminLoginController@showLoginForm')->name('admin');
     Route::post('admin-login','AdminLoginController@adminLogin')->name('admin-login');
-    Route::as('admin.')->group(function() {
+    Route::as('admin.')->middleware('auth')->group(function() {
         Route::get('profile','BasicController@profile')->name('profile');
         Route::get('dashboard','DashboardController@dashboard')->name('dashboard');
 

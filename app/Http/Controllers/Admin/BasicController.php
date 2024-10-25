@@ -25,12 +25,16 @@ class BasicController extends Controller
         'mobile' => 'required|max:20',
         'phone' => 'required|max:20',
         'address' => 'required|string|max:2000',
+        'welcome_message_title' => 'required|string|max:1000',
         'welcome_message' => 'required|string|max:2000',
         'youtube_video_link' => 'required|string|max:2000',
         'google_map_url' => 'required|string|max:2000',
+        'about_us_title' => 'required|string|max:500',
         'about_us' => 'required|string|max:5000',
+        'about_us_image' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
         'mission_vission' => 'required|string|max:5000',
         'privacy_policy' => 'required|string|max:5000',
+        'footer_text' => 'required|string|max:2000',
     ]);
 
     // Fetch all keys from the request
@@ -41,6 +45,11 @@ class BasicController extends Controller
 
     foreach ($keys as $key) {
         $setting_data[$key] = $request->input($key, '');
+    }
+    if ($request->hasFile('about_us_image')) {
+        $setting_data['about_us_image'] = uploadImage($request->file('about_us_image'), 'assets/files/images/website');
+    } else {
+        $setting_data['about_us_image'] = siteSetting()['about_us_image'];
     }
 
     // Convert the settings data to JSON and save it

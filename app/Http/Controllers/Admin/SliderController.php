@@ -44,6 +44,7 @@ class SliderController extends Controller
             'image' => 'required|image|mimes:png,jpg,jpeg|max:5120|dimensions:width=1920,height=468',
             'button_name' => 'nullable|sometimes|string|max:50',
             'link' => 'nullable|sometimes|string|max:350',
+            'bg_color' => 'required'
         ]);
 
         $row = new Slider();
@@ -54,6 +55,7 @@ class SliderController extends Controller
         }
         $row->button_name = $request->button_name;
         $row->link = $request->link;
+        $row->bg_color = $request->bg_color;
         $row->save();
         return redirect()->route('admin.sliders.index')->with(savedMessage());
     }
@@ -97,6 +99,7 @@ class SliderController extends Controller
             'image' => 'nullable|sometimes|image|mimes:png,jpg,jpeg|max:5120|dimensions:width=1920,height=468',
             'button_name' => 'nullable|sometimes|string|max:50',
             'link' => 'nullable|sometimes|string|max:350',
+            'bg_color' => 'required'
         ]);
 
         $row = Slider::findOrFail($id);
@@ -110,6 +113,7 @@ class SliderController extends Controller
         }
         $row->button_name = $request->button_name;
         $row->link = $request->link;
+        $row->bg_color = $request->bg_color;
         $row->save();
         return redirect()->route('admin.sliders.index')->with(updateMessage());
     }
