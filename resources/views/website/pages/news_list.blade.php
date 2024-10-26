@@ -64,7 +64,7 @@
                             <h2>News & Events</h2>
                         </div>
                         <div class="row gy-4">
-                            @foreach ($results as $publication)
+                            @foreach ($results as $news)
                                 @if ($loop->index <= 3)
                                     <div class="col-xl-6 col-md-12">
                                         <article>
@@ -72,16 +72,16 @@
                                                 <div class="post-meta">
                                                     <p class="post-date">
                                                         <small></small>
-                                                        <span class="mr-2">{{ $publication->category->name ?? '' }}</span>
-                                                        <time datetime="{{ date('Y-m-d', strtotime($publication->created_at)) }}">{{ date('Y-m-d', strtotime($publication->created_at)) }}</time>
+                                                        <span class="mr-2">{{ $news->category->name ?? '' }}</span>
+                                                        <time datetime="{{ date('Y-m-d', strtotime($news->created_at)) }}">{{ date('Y-m-d', strtotime($news->created_at)) }}</time>
                                                     </p>
                                                 </div>
                                             </div>
                                             <h2 class="title">
-                                                <a href="{{ route('publication-details', $publication->slug) }}">{{ $publication->title ?? '' }}</a>
+                                                <a href="{{ route('news-details', $news->slug) }}">{{ $news->title ?? '' }}</a>
                                             </h2>
                                             <div class="post-img">
-                                                <img src="{{ asset($publication->image) }}" alt=""
+                                                <img src="{{ asset($news->image) }}" alt=""
                                                     class="img-fluid">
                                             </div>
                                         </article>
@@ -96,12 +96,12 @@
                     <!-- Insight Newsletter -->
                     <div id="insights-newsletter" class="insights-newsletter">
                         <ul>
-                            @foreach ($results as $publication)
+                            @foreach ($results as $news)
                             @if ($loop->index >= 4)
                             <li>
-                                <h4>{{ $publication->category->name ?? '' }} <span class="date-area">- {{ date('Y-m-d', strtotime($publication->created_at)) }}</span></h4>
-                                <h2>{{ $publication->title ?? '' }}</h2>
-                                <a href="{{ route('publication-details', $publication->slug) }}" class="btn default-btn">Read More <i
+                                <h4>{{ $news->category->name ?? '' }} <span class="date-area">- {{ date('Y-m-d', strtotime($news->created_at)) }}</span></h4>
+                                <h2>{{ $news->title ?? '' }}</h2>
+                                <a href="{{ route('news-details', $news->slug) }}" class="btn default-btn">Read More <i
                                         class="fa-solid fa-angles-right"></i></a>
                             </li>
                             @endif

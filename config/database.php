@@ -1,13 +1,6 @@
 <?php
 
 use Illuminate\Support\Str;
-$url = url('/');
-$conneciton = "";
-if($url === 'http://pkf-dev.test') {
-    $conneciton = 'dev_server';
-} else {
-    $conneciton = 'live_server';
-}
 
 return [
 
@@ -22,7 +15,7 @@ return [
     |
     */
 
-    'default' => $conneciton,
+    'default' => 'dev_server',
 
     /*
     |--------------------------------------------------------------------------

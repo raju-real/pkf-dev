@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use App\Mail\SendMail;
+use App\Models\Job;
 use App\Models\Service;
 use App\Models\Publication;
 use App\Models\NewsCategory;
@@ -12,7 +13,6 @@ use App\Models\PeopleDirectory;
 use App\Models\ServiceCategory;
 use App\Models\ServiceSubcategory;
 use App\Models\PublicationCategory;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class HomePageController extends Controller
@@ -138,6 +138,16 @@ class HomePageController extends Controller
         return view('website.pages.search_results',compact('publications','news','services'));
     }
 
+    public function careers() {
+        $jobs = Job::where('status','active')->get();
+        return view('website.pages.careers',compact('jobs'));
+    }
+
+    public function careerDetails($slug) {
+        $data = Job::where('slug',$slug)->firstOrFail();
+        return view('website.pages.career_details',compact('data'));
+    }
+
     public function searchContentMerge()
     {
         $search = request()->get('SearchTerm');
@@ -209,7 +219,6 @@ class HomePageController extends Controller
                 ]);
             }
         } catch (\Exception $e) {
-            Log::error('Mail sending failed: ' . $e->getMessage());
             return response()->json([
                 'status' => 'error',
                 'message' => 'Message not sent. Something went wrong!'

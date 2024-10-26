@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
@@ -25,6 +26,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // $domain = url('/');
+        // $connection = ($domain === 'http://pkf-dev.test') ? 'dev_server' : 'live_server';
+        // // Set the database connection dynamically
+        // Config::set('database.default', $connection);
+
         Schema::defaultStringLength(191);
         Validator::extend('max_after_decimal', function ($attribute, $value, $parameters, $validator) {
             $maxValueAfterDecimal = (int) $parameters[0];

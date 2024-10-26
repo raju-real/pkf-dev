@@ -25,6 +25,8 @@
     <link href="{{ asset('assets/user/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/user/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/user/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.6/css/dataTables.dataTables.min.css">
+
     <!-- Main CSS File -->
     <link href="{{ asset('assets/user/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/user/css/responsive.css') }}" rel="stylesheet">
@@ -60,7 +62,7 @@
                         </ul>
                     </li>
                     <a class="search-trigger" href="javascript:void(0)"><i class="bi bi-search"></i></a>
-                    <a class="bar-trigger search-content" href="javascript:void(0)">
+                    <a class="bar-trigger" href="javascript:void(0)">
                         <i class="bi bi-list"></i>
                     </a>
                     <div id="MainNav" class="">

@@ -20,6 +20,8 @@ Route::get('publication-details/{slug}','HomePageController@publicationDetails')
 
 Route::get('about','HomePageController@aboutUs')->name('about');
 Route::get('contact','HomePageController@contactUs')->name('contact');
+Route::get('careers','HomePageController@careers')->name('careers');
+Route::get('career-details/{slug}','HomePageController@careerDetails')->name('career-details');
 Route::post('send-contact-message','HomePageController@storeMessage')->name('send-contact-message');
 Route::get('search','HomePageController@searchContent')->name('search-content');
 
@@ -42,6 +44,8 @@ Route::namespace('Admin')->group(function() {
         Route::resource('service-categories','ServiceCategoryController');
         Route::resource('service-subcategories','ServiceSubcategoryController');
         Route::resource('services','ServiceController');
+        Route::resource('job-departments','JobDepartmentController');
+        Route::resource('jobs','JobController');
 
         Route::get('website-settings','BasicController@websiteSettings')->name('website-settings');
         Route::put('update-website-settings','BasicController@updateWebsiteSettings')->name('update-website-settings');
