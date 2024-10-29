@@ -41,7 +41,7 @@
                     </h2>
                 </div>
                 <div class="col-md-6 second-part">
-                    <h2><?php echo e(siteSetting()['Innovative business solutions in PKF'] ?? ''); ?></h2>
+                    <h2><?php echo e(siteSetting()['welcome_message_title'] ?? ''); ?></h2>
                     <p><?php echo e(siteSetting()['welcome_message'] ?? ''); ?></p>
                     <?php if(Route::has('about-us')): ?>
                     <a href="<?php echo e(route("about-us")); ?>" class="discover">Discover PKF Kong</a>

@@ -41,7 +41,7 @@
                     </h2>
                 </div>
                 <div class="col-md-6 second-part">
-                    <h2>{{ siteSetting()['Innovative business solutions in PKF'] ?? '' }}</h2>
+                    <h2>{{ siteSetting()['welcome_message_title'] ?? '' }}</h2>
                     <p>{{ siteSetting()['welcome_message'] ?? '' }}</p>
                     @if(Route::has('about-us'))
                     <a href="{{ route("about-us") }}" class="discover">Discover PKF Kong</a>
