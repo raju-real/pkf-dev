@@ -84,7 +84,7 @@
             <div class="row">
                 @foreach(allPublications() as $publication)
                 <div class="col-md-4">
-                    <a href="{{ route('publication-details',$publication->slug) }}" class="publication-item bg1 zoombackground">
+                    <a href="{{ route('publication-details',$publication->slug) }}" class="publication-item bg{{ $loop->index + 1 }} zoombackground">
                         <div style="background-image:url('{{ asset($publication->image) }}');"></div>
                         <h3>{{ strLimit($publication->title,100) }}</h3>
                         <button type="button" class="btn">Learn More <i class="fa-solid fa-angles-right"></i></button>

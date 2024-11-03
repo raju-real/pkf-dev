@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 26, 2024 at 06:53 AM
+-- Generation Time: Oct 30, 2024 at 05:36 PM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -63,6 +63,58 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `jobs`
+--
+
+CREATE TABLE `jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `department_id` int(11) NOT NULL,
+  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `location` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'in-active',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `jobs`
+--
+
+INSERT INTO `jobs` (`id`, `department_id`, `title`, `slug`, `location`, `description`, `file`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 2, 'How can HR leaders write high-quality job descriptions', 'how-can-hr-leaders-write-high-quality-job-descriptions', 'Dhaka, Bangladesh', '<p>hese five tips can help HR professionals build job descriptions that attract suitable candidates:</p>\r\n\r\n<ul>\r\n	<li><strong>Include essential information in separate sections.</strong>&nbsp; A company overview, job summary, and an explanation of required responsibilities, skills, and qualifications help candidates determine if the position is appropriate for them. Specify the job&rsquo;s benefits and&nbsp;<a href=\"https://www.hibob.com/hr-glossary/company-perks/\">perks</a>&nbsp;as well&mdash;it can tip the scales for curious candidates.</li>\r\n	<li><strong>Make sure your descriptions are well-written.</strong>&nbsp;The quality of the job description reflects directly on the company ethos. An engaging, comprehensive, and concise job description demonstrates professionalism and trustworthiness.</li>\r\n	<li><strong>Make it concise.</strong>&nbsp; Ensure that the description is short&mdash;around 300 words&mdash;and to the point, as candidates will probably skip over a long-winded job description.</li>\r\n	<li><strong>Keep your target audience in mind.</strong>&nbsp;Remember that the job description is intended for a living, breathing, thinking person. Use conversational, engaging language that aligns with the company brand. Depict the job accurately by including the expected duties and necessary soft skills, and perhaps explain what a day on the job entails.&nbsp;</li>\r\n	<li><strong>Update your job descriptions regularly.</strong>&nbsp;Periodically review job descriptions to ensure they accurately reflect the role. If a position changes to include more responsibilities, update it. Proper job descriptions are essential for&nbsp;<a href=\"https://www.hibob.com/hr-glossary/hr-processes/\">HR processes</a>&nbsp;to function smoothly.</li>\r\n</ul>', 'assets/files/images/jobs/laravel array validation.pdf-1729943365-.pdf', 'in-active', '2024-10-26 05:49:25', '2024-10-26 05:51:43', NULL),
+(2, 1, 'Job descriptions vs. job responsibilities', 'job-descriptions-vs-job-responsibilities', 'Dhaka Mirpur, Bangladesh', '<p>Job descriptions and job responsibilities are both vital to the recruitment process.</p>\r\n\r\n<p>A job description is an employer document that describes an open role at the company. It&rsquo;s often included in job ads to give prospective candidates a clear idea of a role&rsquo;s scope and what skills and experience are required to succeed in it. It also typically includes a summary of the position, job title, and information about the&nbsp;<a href=\"https://www.hibob.com/hr-glossary/company-culture/\">company culture</a>&nbsp;and benefits.</p>\r\n\r\n<p>On the other hand, job responsibilities are what a company outlines as the specific tasks and duties people in each role are accountable for. These can change over time as a role evolves with the company and changes in business needs.</p>\r\n\r\n<p>Recommended For Further Reading</p>\r\n\r\n<ul>\r\n	<li><a href=\"https://www.hibob.com/blog/interview-feedback-examples/\">Interview feedback examples</a></li>\r\n	<li><a href=\"https://www.hibob.com/hr-glossary/applicant-tracking-system/\">What is an applicant tracking system (ATS)?</a></li>\r\n	<li><a href=\"https://www.hibob.com/hr-glossary/recruitment-management-system/\">What is a recruitment management system?</a></li>\r\n	<li><a href=\"https://www.hibob.com/hr-tools/hr-job-descriptions-and-recruitment-checklist/\">Recruit the best HR professionals: HR job description templates</a></li>\r\n	<li><a href=\"https://www.hibob.com/hr-tools/human-resources-hr-resume-templates/\">Advance your HR career: Human resources resume templates</a></li>\r\n	<li><a href=\"https://www.hibob.com/hr-tools/job-description-template/\">Free job description template to streamline recruiting</a></li>\r\n</ul>', 'assets/files/images/jobs/laravel array validation.pdf-1729943473-.pdf', 'active', '2024-10-26 05:51:13', '2024-10-26 06:00:38', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `job_departments`
+--
+
+CREATE TABLE `job_departments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(400) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `job_departments`
+--
+
+INSERT INTO `job_departments` (`id`, `name`, `description`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Software Development', 'Software Development', '2024-10-26 05:25:04', '2024-10-26 05:25:04', NULL),
+(2, 'Marketing', 'Marketing', '2024-10-26 05:25:18', '2024-10-26 05:25:18', NULL),
+(3, 'Database Administrator', 'Database Administrator', '2024-10-26 05:25:32', '2024-10-26 05:26:45', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -89,7 +141,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (10, '2024_08_30_184425_create_service_categories_table', 1),
 (11, '2024_08_30_184442_create_service_subcategories_table', 1),
 (12, '2024_09_06_042557_create_publication_categories_table', 1),
-(13, '2024_09_06_042812_create_publications_table', 1);
+(13, '2024_09_06_042812_create_publications_table', 1),
+(15, '2024_10_26_111622_create_job_departments_table', 2),
+(18, '2024_10_26_111553_create_jobs_table', 3);
 
 -- --------------------------------------------------------
 
@@ -409,6 +463,18 @@ ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `jobs`
+--
+ALTER TABLE `jobs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `job_departments`
+--
+ALTER TABLE `job_departments`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -499,10 +565,22 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `jobs`
+--
+ALTER TABLE `jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `job_departments`
+--
+ALTER TABLE `job_departments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `news`

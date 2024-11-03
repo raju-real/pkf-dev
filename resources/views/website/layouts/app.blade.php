@@ -11,8 +11,8 @@
     <meta name="keywords" content="">
 
     <!-- Favicons -->
-    <link href="assets/img/logo/favicon.ico" rel="icon">
-    <link href="assets/img/logo/favicon.ico" rel="apple-touch-icon">
+    <link href="{{ asset('assets/user/img/logo/favicon.ico') }}" rel="icon">
+    <link href="{{ asset('assets/user/img/logo/favicon.ico') }}" rel="apple-touch-icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -37,7 +37,7 @@
         <div class="branding d-flex align-items-center">
             <div class="container position-relative d-flex align-items-center justify-content-between">
                 <a href="{{ route('home') }}" class="logo d-flex align-items-center">
-                    <img src="assets/img/logo/pkf-2-logo.svg" alt="">
+                    <img src="{{ asset('assets/user/img/logo/RGB (1 Line)_coloured.png') }}" alt="">
                 </a>
                 <nav id="navmenu" class="navmenu">
                     <ul>
@@ -46,9 +46,6 @@
                     <i class="mobile-nav-toggle d-xl-none  bi bi-list"></i>
                 </nav>
                 <div class="end-menu">
-                    <li class="d-flex align-items-center request-callback">
-                        <a href="#">Request Call Back</a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -56,7 +53,6 @@
                             <span class="ln-title">English</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#"><span class="ln-active">Arabic</span></a></li>
                             <li><a class="dropdown-item" href="#"><span>Bangla</span></a></li>
                             <li><a class="dropdown-item" href="#"><span>English</span></a></li>
                         </ul>
@@ -75,8 +71,6 @@
                                         <span class="ln-title">English</span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#"><span
-                                                    class="ln-active">Arabic</span></a></li>
                                         <li><a class="dropdown-item" href="#"><span>Bangla</span></a></li>
                                         <li><a class="dropdown-item" href="#"><span>English</span></a></li>
                                     </ul>
